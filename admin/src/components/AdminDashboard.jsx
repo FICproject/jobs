@@ -352,6 +352,7 @@ export default function AdminDashboard({ API_URL, currentUser, sidebarOpen, setS
                     <th>Job Title</th>
                     <th>Company</th>
                     <th>Date</th>
+                    <th>Payment</th>
                     <th>Status</th>
                     <th>Action</th>
                   </tr>
@@ -361,28 +362,33 @@ export default function AdminDashboard({ API_URL, currentUser, sidebarOpen, setS
                     <tr key={app.id}>
                       <td style={{ fontWeight: 700, color: '#2563eb' }}>{app.applicationNumber}</td>
                       <td>
-                        <div style={{ fontWeight: 800, color: '#1e293b', fontSize: '1.05rem', marginBottom: '6px' }}>{app.candidateName}</div>
+                        <div style={{ fontWeight: 800, color: '#1e293b', fontSize: '1.05rem', marginBottom: '6px' }}>
+                          {app.candidateName && app.candidateName !== 'Anonymous' ? app.candidateName : (app.candidateDetails?.name || app.candidateName || 'Anonymous')}
+                        </div>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', fontSize: '0.85rem' }}>
                           <div style={{ color: '#047857', background: '#d1fae5', padding: '4px 8px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                            📱 {app.candidateMobile}
+                            📱 {app.candidateMobile || app.candidateDetails?.mobile || app.candidateDetails?.phone || 'N/A'}
                           </div>
                           <div style={{ color: '#1d4ed8', background: '#dbeafe', padding: '4px 8px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                            ✉️ {app.candidateEmail}
+                            ✉️ {app.candidateEmail || app.candidateDetails?.email || 'N/A'}
                           </div>
                           <div style={{ color: '#b45309', background: '#fef3c7', padding: '4px 8px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                            🎂 DOB: {app.candidateQualification || 'N/A'}
+                            🎂 DOB: {app.candidateDob || app.dob || app.candidateDetails?.dob || app.candidateQualification || 'N/A'}
                           </div>
                           <div style={{ color: '#6d28d9', background: '#f3e8ff', padding: '4px 8px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                            🏙️ City: {app.candidateLocation || 'N/A'}
+                            🏙️ City: {app.candidateLocation || app.candidateDetails?.location || app.candidateDetails?.city || 'N/A'}
                           </div>
                           <div style={{ color: '#be185d', background: '#fce7f3', padding: '4px 8px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600, gridColumn: 'span 2' }}>
-                            💼 Experience: {app.candidateExperience || 'N/A'}
+                            💼 Experience: {app.candidateExperience || app.candidateDetails?.experience || 'N/A'}
                           </div>
                         </div>
                       </td>
                       <td>{app.jobTitle}</td>
                       <td>{app.companyName}</td>
                       <td>{new Date(app.appliedAt).toLocaleDateString()}</td>
+                      <td style={{ fontWeight: 600, color: app.paymentAmount > 100 ? '#10b981' : '#f59e0b' }}>
+                        ₹{app.paymentAmount || 0}
+                      </td>
                       <td>{getStatusBadge(app.status)}</td>
                       <td>
                         <button
@@ -615,6 +621,7 @@ export default function AdminDashboard({ API_URL, currentUser, sidebarOpen, setS
                     <th>Company</th>
                     <th>Applied On</th>
                     <th>HR Reference</th>
+                    <th>Payment</th>
                     <th>Status</th>
                     <th>Actions</th>
                   </tr>
@@ -624,22 +631,24 @@ export default function AdminDashboard({ API_URL, currentUser, sidebarOpen, setS
                     <tr key={app.id}>
                       <td style={{ fontWeight: 700, color: '#2563eb' }}>{app.applicationNumber}</td>
                       <td>
-                        <div style={{ fontWeight: 800, color: '#1e293b', fontSize: '1.05rem', marginBottom: '6px' }}>{app.candidateName}</div>
+                        <div style={{ fontWeight: 800, color: '#1e293b', fontSize: '1.05rem', marginBottom: '6px' }}>
+                          {app.candidateName && app.candidateName !== 'Anonymous' ? app.candidateName : (app.candidateDetails?.name || app.candidateName || 'Anonymous')}
+                        </div>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', fontSize: '0.85rem' }}>
                           <div style={{ color: '#047857', background: '#d1fae5', padding: '4px 8px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                            📱 {app.candidateMobile}
+                            📱 {app.candidateMobile || app.candidateDetails?.mobile || app.candidateDetails?.phone || 'N/A'}
                           </div>
                           <div style={{ color: '#1d4ed8', background: '#dbeafe', padding: '4px 8px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                            ✉️ {app.candidateEmail}
+                            ✉️ {app.candidateEmail || app.candidateDetails?.email || 'N/A'}
                           </div>
                           <div style={{ color: '#b45309', background: '#fef3c7', padding: '4px 8px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                            🎂 DOB: {app.candidateQualification || 'N/A'}
+                            🎂 DOB: {app.candidateDob || app.dob || app.candidateDetails?.dob || app.candidateQualification || 'N/A'}
                           </div>
                           <div style={{ color: '#6d28d9', background: '#f3e8ff', padding: '4px 8px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                            🏙️ City: {app.candidateLocation || 'N/A'}
+                            🏙️ City: {app.candidateLocation || app.candidateDetails?.location || app.candidateDetails?.city || 'N/A'}
                           </div>
                           <div style={{ color: '#be185d', background: '#fce7f3', padding: '4px 8px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600, gridColumn: 'span 2' }}>
-                            💼 Experience: {app.candidateExperience || 'N/A'}
+                            💼 Experience: {app.candidateExperience || app.candidateDetails?.experience || 'N/A'}
                           </div>
                         </div>
                         {app.candidateResumeUrl && (
@@ -661,6 +670,16 @@ export default function AdminDashboard({ API_URL, currentUser, sidebarOpen, setS
                             </div>
                           );
                         })() : <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>Direct</span>}
+                      </td>
+                      <td>
+                        <div style={{ fontWeight: 600, color: app.paymentAmount > 100 ? '#10b981' : '#f59e0b', fontSize: '0.9rem' }}>
+                          ₹{app.paymentAmount || 0}
+                        </div>
+                        {app.paymentId && (
+                          <div style={{ fontSize: '0.7rem', color: '#64748b', marginTop: '2px', wordBreak: 'break-all', maxWidth: '100px' }}>
+                            {app.paymentId.replace('FREE_TEST_', 'Free-')}
+                          </div>
+                        )}
                       </td>
                       <td>{getStatusBadge(app.status)}</td>
                       <td>
@@ -710,6 +729,7 @@ export default function AdminDashboard({ API_URL, currentUser, sidebarOpen, setS
                 <thead>
                   <tr>
                     <th>Candidate</th>
+                    <th>HR / Partner</th>
                     <th>Job Title</th>
                     <th>Company</th>
                     <th>Round</th>
@@ -722,6 +742,28 @@ export default function AdminDashboard({ API_URL, currentUser, sidebarOpen, setS
                   {interviews.map(int => (
                     <tr key={int.id}>
                       <td style={{ fontWeight: 700 }}>{int.candidateName}</td>
+                      <td>
+                        {(() => {
+                          const app = applications.find(a => a.id === int.applicationId || a.candidateId === int.candidateId);
+                          const hr = hrs.find(h => h.referralCode === (app?.referredBy || int.referredBy));
+                          if (hr) {
+                            return (
+                              <div>
+                                <div style={{ fontWeight: 600, color: '#0f172a' }}>{hr.name}</div>
+                                <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{hr.referralCode}</div>
+                              </div>
+                            );
+                          }
+                          return int.hrName ? (
+                            <div>
+                              <div style={{ fontWeight: 600, color: '#0f172a' }}>{int.hrName}</div>
+                              {int.hrReferralCode && <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{int.hrReferralCode}</div>}
+                            </div>
+                          ) : (
+                            <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>Direct</span>
+                          );
+                        })()}
+                      </td>
                       <td>{int.jobTitle}</td>
                       <td>{int.companyName}</td>
                       <td><span className="badge badge-shortlisted">{int.round}</span></td>
@@ -775,43 +817,99 @@ export default function AdminDashboard({ API_URL, currentUser, sidebarOpen, setS
                     <th>Referral Code</th>
                     <th>Link Clicks</th>
                     <th>Candidates Applied</th>
+                    <th>Incentives Earned</th>
                     <th>Status</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {hrs.map(hr => (
-                    <tr key={hr.id}>
-                      <td style={{ fontWeight: 700 }}>{hr.name}</td>
-                      <td>{hr.email}</td>
-                      <td>
-                        <span style={{ background: '#fef3c7', color: '#b45309', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold' }}>
-                          {hr.referralCode}
-                        </span>
-                      </td>
-                      <td style={{ fontWeight: 600, color: '#3b82f6' }}>{hr.linkClicks || 0}</td>
-                      <td style={{ fontWeight: 600, color: '#10b981' }}>
-                        {applications.filter(app => app.referredBy === hr.referralCode).length}
-                      </td>
-                      <td><span className="badge badge-active">Active</span></td>
-                      <td>
-                        <button
-                          className="btn-secondary"
-                          style={{ padding: '4px 8px', color: '#ef4444' }}
-                          onClick={() => {
-                            if (!window.confirm(`Delete HR ${hr.name}?`)) return;
-                            fetch(`${API_URL}/api/users/hr/${hr.id}`, { method: 'DELETE' })
-                            .then(() => fetchAllData());
-                          }}
-                        >
-                          <Trash2 size={14} />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {hrs.map(hr => {
+                    const hrApps = applications.filter(app => app.referredBy === hr.referralCode);
+                    const closedCount = hrApps.filter(app => app.status === 'Selected' || app.status === 'Hired' || app.status === 'Closed').length;
+                    return (
+                      <tr key={hr.id}>
+                        <td style={{ fontWeight: 700 }}>{hr.name}</td>
+                        <td>{hr.email}</td>
+                        <td>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                            <span style={{ background: '#fef3c7', color: '#b45309', padding: '3px 8px', borderRadius: '4px', fontWeight: 'bold', width: 'fit-content' }}>
+                              {hr.referralCode}
+                            </span>
+                            <div style={{ display: 'flex', gap: '4px', fontSize: '0.72rem' }}>
+                              <button
+                                title="Copy Web Referral Link (?ref=)"
+                                onClick={() => {
+                                  const url = hr.webReferralUrl || `https://jobs.forgeindiaconnect.in?ref=${hr.referralCode}`;
+                                  navigator.clipboard.writeText(url);
+                                  alert(`Copied Web Link:\n${url}`);
+                                }}
+                                style={{ background: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: '4px', padding: '2px 6px', cursor: 'pointer', color: '#334155', fontWeight: 600 }}
+                              >
+                                💻 Web
+                              </button>
+                              <button
+                                title="Copy Mobile Referral Link (?m.ref=)"
+                                onClick={() => {
+                                  const url = hr.mobileReferralUrl || `https://jobs.forgeindiaconnect.in?m.ref=${hr.referralCode}`;
+                                  navigator.clipboard.writeText(url);
+                                  alert(`Copied Mobile Link:\n${url}`);
+                                }}
+                                style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '4px', padding: '2px 6px', cursor: 'pointer', color: '#2563eb', fontWeight: 600 }}
+                              >
+                                📱 Mobile
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                        <td style={{ fontWeight: 600, color: '#3b82f6' }}>{hr.linkClicks || 0}</td>
+                        <td>
+                          <div style={{ fontWeight: 600, color: '#10b981' }}>{hrApps.length}</div>
+                          <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{closedCount} closed</div>
+                        </td>
+                        <td style={{ fontWeight: 600, color: '#10b981' }}>
+                          ₹{hr.incentives || 0}
+                        </td>
+                        <td><span className="badge badge-active">Active</span></td>
+                        <td>
+                          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                            <button
+                              className="btn-secondary"
+                              style={{
+                                padding: '4px 10px',
+                                fontSize: '0.8rem',
+                                color: '#059669',
+                                backgroundColor: '#ecfdf5',
+                                borderColor: '#a7f3d0',
+                                fontWeight: 600,
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '4px'
+                              }}
+                              onClick={() => {
+                                alert(`Candidate Incentives for ${hr.name} (${hr.referralCode}):\n\nTotal Applied: ${hrApps.length}\nClosed/Hired: ${closedCount}\nTotal Incentives Earned: ₹${hr.incentives || 0}`);
+                              }}
+                            >
+                              Candidate Incentives
+                            </button>
+                            <button
+                              className="btn-secondary"
+                              style={{ padding: '4px 8px', color: '#ef4444' }}
+                              onClick={() => {
+                                if (!window.confirm(`Delete HR ${hr.name}?`)) return;
+                                fetch(`${API_URL}/api/users/hr/${hr.id}`, { method: 'DELETE' })
+                                .then(() => fetchAllData());
+                              }}
+                            >
+                              <Trash2 size={14} />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
                   {hrs.length === 0 && (
                     <tr>
-                      <td colSpan="7" style={{ textAlign: 'center', color: '#64748b', padding: '2rem' }}>No HRs found. Add one to get started.</td>
+                      <td colSpan="8" style={{ textAlign: 'center', color: '#64748b', padding: '2rem' }}>No HRs found. Add one to get started.</td>
                     </tr>
                   )}
                 </tbody>

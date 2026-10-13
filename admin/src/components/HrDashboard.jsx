@@ -34,7 +34,9 @@ export default function HrDashboard({ API_URL, currentUser, sidebarOpen, setSide
     ? 'http://localhost:5173'
     : 'https://jobs.forgeindiaconnect.in';
 
-  const referralLink = `${candidatePortalBaseUrl}?ref=${currentUser.referralCode}`;
+  const webReferralUrl = stats?.webReferralUrl || `${candidatePortalBaseUrl}?ref=${currentUser.referralCode}`;
+  const mobileReferralUrl = stats?.mobileReferralUrl || `${candidatePortalBaseUrl}?m.ref=${currentUser.referralCode}`;
+  const [copiedLink, setCopiedLink] = useState(null);
 
   const fetchStats = () => {
     fetch(`${API_URL}/api/users/hr/${currentUser.referralCode}/dashboard`)
@@ -75,14 +77,20 @@ export default function HrDashboard({ API_URL, currentUser, sidebarOpen, setSide
     }
   }, [activeTab, stats]);
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(referralLink);
+  const copyToClipboard = (type = 'mobile') => {
+    const link = type === 'mobile' ? mobileReferralUrl : webReferralUrl;
+    navigator.clipboard.writeText(link);
+    setCopiedLink(type);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => {
+      setCopied(false);
+      setCopiedLink(null);
+    }, 2000);
   };
 
-  const shareOnWhatsApp = () => {
-    const text = `Hey! Check out these amazing job openings at Forge India Connect: ${referralLink}`;
+  const shareOnWhatsApp = (type = 'mobile') => {
+    const link = type === 'mobile' ? mobileReferralUrl : webReferralUrl;
+    const text = `Hey! Check out these amazing job openings at Forge India Connect: ${link}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -264,19 +272,49 @@ export default function HrDashboard({ API_URL, currentUser, sidebarOpen, setSide
         {activeTab === 'overview' && (
           <div className="animate-fade">
             
-            <div style={{ background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)', padding: '1.5rem', borderRadius: '16px', color: 'white', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)', padding: '1.5rem', borderRadius: '16px', color: 'white', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div>
-                <h3 style={{ fontSize: '1.1rem', marginBottom: '0.25rem', fontWeight: 'bold' }}>Your Unique Referral Link</h3>
-                <p style={{ color: '#e0e7ff', fontSize: '0.85rem' }}>Share this link with candidates. Anyone who opens or applies using this link will be tracked under your account.</p>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 'bold' }}>Candidate Referral Links</h3>
+                  <span style={{ backgroundColor: 'rgba(255,255,255,0.2)', padding: '3px 10px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold' }}>
+                    Code: {currentUser.referralCode}
+                  </span>
+                </div>
+                <p style={{ color: '#e0e7ff', fontSize: '0.85rem' }}>
+                  Share either link with candidates. Sourced candidates will be automatically tracked under your account. Mobile link redirects candidates directly into the Candidate App.
+                </p>
               </div>
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                <input type="text" readOnly value={referralLink} style={{ flex: 1, padding: '10px', borderRadius: '8px', border: 'none', color: '#0f172a', fontWeight: 'bold', minWidth: '200px', fontSize: '0.9rem' }} />
-                <button className="btn-primary" onClick={copyToClipboard} style={{ background: copied ? '#059669' : '#10b981', border: 'none', transition: 'background 0.3s' }}>
-                  <Copy size={16} /> {copied ? 'Copied' : 'Copy'}
-                </button>
-                <button className="btn-primary" onClick={shareOnWhatsApp} style={{ background: '#25D366', border: 'none', color: 'white' }}>
-                  <Share2 size={16} /> WhatsApp
-                </button>
+
+              {/* 1. Mobile Referral Link (?m.ref=) */}
+              <div style={{ background: 'rgba(255,255,255,0.1)', padding: '12px 14px', borderRadius: '10px', backdropFilter: 'blur(8px)' }}>
+                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#fef08a', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span>📱 Mobile Referral Link (Candidate App Auto-Redirect & Download)</span>
+                </div>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  <input type="text" readOnly value={mobileReferralUrl} style={{ flex: 1, padding: '8px 12px', borderRadius: '8px', border: 'none', color: '#0f172a', fontWeight: 'bold', minWidth: '200px', fontSize: '0.85rem' }} />
+                  <button className="btn-primary" onClick={() => copyToClipboard('mobile')} style={{ background: copiedLink === 'mobile' ? '#059669' : '#10b981', border: 'none', transition: 'background 0.3s', fontSize: '0.85rem', padding: '8px 14px' }}>
+                    <Copy size={15} /> {copiedLink === 'mobile' ? 'Copied' : 'Copy Mobile Link'}
+                  </button>
+                  <button className="btn-primary" onClick={() => shareOnWhatsApp('mobile')} style={{ background: '#25D366', border: 'none', color: 'white', fontSize: '0.85rem', padding: '8px 14px' }}>
+                    <Share2 size={15} /> WhatsApp
+                  </button>
+                </div>
+              </div>
+
+              {/* 2. Web Referral Link (?ref=) */}
+              <div style={{ background: 'rgba(255,255,255,0.1)', padding: '12px 14px', borderRadius: '10px', backdropFilter: 'blur(8px)' }}>
+                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#e2e8f0', marginBottom: '6px' }}>
+                  💻 Web Referral Link (Standard Browser Portal)
+                </div>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  <input type="text" readOnly value={webReferralUrl} style={{ flex: 1, padding: '8px 12px', borderRadius: '8px', border: 'none', color: '#0f172a', fontWeight: 'bold', minWidth: '200px', fontSize: '0.85rem' }} />
+                  <button className="btn-primary" onClick={() => copyToClipboard('web')} style={{ background: copiedLink === 'web' ? '#059669' : '#334155', border: 'none', transition: 'background 0.3s', fontSize: '0.85rem', padding: '8px 14px' }}>
+                    <Copy size={15} /> {copiedLink === 'web' ? 'Copied' : 'Copy Web Link'}
+                  </button>
+                  <button className="btn-primary" onClick={() => shareOnWhatsApp('web')} style={{ background: '#25D366', border: 'none', color: 'white', fontSize: '0.85rem', padding: '8px 14px' }}>
+                    <Share2 size={15} /> WhatsApp
+                  </button>
+                </div>
               </div>
             </div>
 

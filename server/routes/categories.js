@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { CategoryModel } = require('../db');
+const { CategoryModel, readDBAsync } = require('../db');
 
 // GET /api/categories
 router.get('/', async (req, res) => {
   try {
-    const categories = await CategoryModel.find({}).lean();
-    res.json(categories || []);
+    const db = await readDBAsync();
+    res.json(db.categories || []);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch categories from MongoDB Atlas.' });
+    res.status(500).json({ error: 'Failed to fetch categories.' });
   }
 });
 

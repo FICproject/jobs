@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { readDBAsync, JobModel } = require('../db');
+const {
+  readDBAsync,
+  JobModel,
+  saveJobInMemory,
+  updateJobInMemory,
+  deleteJobInMemory,
+  getIsMongoConnected
+} = require('../db');
 
 // GET /api/jobs (supports query: categoryId, companyId, status, search, location)
 router.get('/', async (req, res) => {
@@ -61,9 +68,95 @@ router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const db = await readDBAsync();
-    const job = db.jobs.find(j => j.id === id);
+    let job = db.jobs.find(j => j.id === id);
 
     if (!job) {
+      // Check IT training processes
+      const itProcesses = db.itTrainingProcesses || [];
+      const itProc = itProcesses.find(p => p.id === id);
+      if (itProc) {
+        const itCategory = itProc.itCategory || 'Placement';
+        const isCourse = itCategory === 'Course';
+        const isInternship = itCategory === 'Internship';
+        const companyName = isCourse ? 'FIC IT Courses' : isInternship ? 'FIC Free IT Internship' : 'FIC IT Training & Placement';
+
+        return res.json({
+          id: itProc.id,
+          title: itProc.role || 'Software Engineer Trainee',
+          role: itProc.role || 'Software Engineer Trainee',
+          company: companyName,
+          companyName: companyName,
+          companyLogo: '/logo.png',
+          categoryName: 'IT & Software Development',
+          categoryId: 'cat_it',
+          itCategory: itCategory,
+          processName: itProc.processName || 'PROCESS 1',
+          programName: `${itProc.processName || 'PROCESS 1'}: ${itProc.programTitle || 'FIC IT Training Program'}`,
+          programTitle: itProc.programTitle,
+          salary: itProc.salary || (isInternship ? 'Stipend: ₹0' : '3.5 - 6.0 LPA'),
+          experience: 'Fresher & Experience',
+          experienceTag: 'Fresher & Experience',
+          location: itProc.location || 'PAN INDIA',
+          trainingPeriod: itProc.trainingPeriod || '6 Months',
+          trainingTitle: itProc.trainingPeriod || '6 Months',
+          trainingSubtext: itProc.trainingSubtext || '3 Months Classroom Training | 3 Months Real Project Training',
+          stipend: `STIPEND ₹${itProc.stipend || (isInternship ? '0' : '12,000')}`,
+          stipendTitle: `STIPEND ₹${itProc.stipend || (isInternship ? '0' : '12,000')}`,
+          stipendSubtext: itProc.stipendSubtext || (isInternship ? '100% Free Internship - Zero Cost' : `Stipend ₹${itProc.stipend || '12,000'} per month during training`),
+          trainingFee: itProc.trainingFee || (isInternship ? '100% FREE' : '1.6 LPA'),
+          feeRefundType: isCourse ? 'Course Fee' : isInternship ? '100% Free' : '100% Placement Guarantee',
+          feeRefundDetails: isInternship ? 'Zero Cost Internship' : '100% money back guarantee upon successful training completion',
+          bondPeriod: itProc.bondPeriod || (isInternship || isCourse ? 'No Bond' : '1 Year Bond'),
+          originalsRequired: itProc.originalsRequired || (isInternship || isCourse ? 'Not Required' : 'Originals Need to Submit'),
+          description: itProc.description || (isCourse 
+            ? `Comprehensive IT course in ${itProc.role || 'Software Development'} with practical labs and mentorship.`
+            : isInternship
+            ? `Join our exclusive 100% Free Internship program. Work on live industry projects alongside experienced developers without paying any fees.`
+            : `Complete IT Job Training with 100% placement guarantee in top IT companies.`),
+          responsibilities: isCourse ? [
+            'Master core concepts, modern frameworks, and design patterns.',
+            'Build full stack portfolio applications with industry best practices.',
+            'Participate in live coding sessions, problem solving, and architecture reviews.',
+            'Complete milestone capstone projects with code walkthroughs.'
+          ] : isInternship ? [
+            'Work on live enterprise and customer projects under guidance of senior technical leads.',
+            'Collaborate with development teams in daily standups, code reviews, and sprints.',
+            'Build real-world features, write clean maintainable code, and fix defects.',
+            'Gain hands-on software development lifecycle (SDLC) experience.'
+          ] : [
+            'Complete comprehensive software development and full stack curriculum.',
+            'Work on live enterprise projects under guidance of senior technical leads.',
+            'Participate in mock technical interviews, system design sessions, and client presentations.',
+            'Clear evaluation rounds and get deployed to hiring partner tech firms.'
+          ],
+          requirements: (isCourse || isInternship) ? [
+            'Any Degree (B.E, B.Tech, B.Sc, BCA, MCA, M.Tech) with interest in IT careers.',
+            'Basic logical thinking, computer fundamentals, and readiness to learn.'
+          ] : [
+            'Any Degree (B.E, B.Tech, B.Sc, BCA, MCA, M.Tech) with interest in IT careers.',
+            'Basic logical thinking, computer fundamentals, and readiness to learn.',
+            `Agreement to program terms: ${itProc.bondPeriod || '1 Year Bond'}.`,
+            `${itProc.originalsRequired || 'Originals Need to Submit'} for document verification.`
+          ],
+          interviewSteps: (itProc.selectionSteps && itProc.selectionSteps.length > 0) ? itProc.selectionSteps : [
+            { stepNumber: 1, title: 'Screening & Registration', description: 'Application review and initial profile shortlisting' },
+            { stepNumber: 2, title: 'Technical Assessment', description: 'Basic coding, problem solving and aptitude round' },
+            { stepNumber: 3, title: 'Technical & HR Interview', description: 'Discussion with hiring manager & interview clearance' },
+            { stepNumber: 4, title: 'Batch Onboarding', description: 'Offer letter issuance, document submission, and training commencement' }
+          ],
+          trainingPhases: (itProc.trainingPhases && itProc.trainingPhases.length > 0) ? itProc.trainingPhases : (
+            (itProc.trainingSubtext && itProc.trainingSubtext.includes('|')) ? [
+              { title: 'Phase 1 Training', duration: itProc.trainingSubtext.split('|')[0].trim(), mode: 'Classroom Training', stipend: `STIPEND ₹${itProc.stipend || '12,000'}` },
+              { title: 'Phase 2 Training', duration: itProc.trainingSubtext.split('|')[1].trim(), mode: 'Real Project Training (OJT)', stipend: `STIPEND ₹${itProc.stipend || '12,000'}` }
+            ] : [
+              { title: 'Phase 1 Training', duration: itProc.trainingPeriod || '3 Months', mode: 'Classroom Training', stipend: `STIPEND ₹${itProc.stipend || '12,000'}` },
+              { title: 'Phase 2 Training', duration: '3 Months', mode: 'Real Project Training (OJT)', stipend: `STIPEND ₹${itProc.stipend || '12,000'}` }
+            ]
+          ),
+          itProcessList: itProcesses.filter(p => (p.role || '').trim().toLowerCase() === (itProc.role || '').trim().toLowerCase() && (p.itCategory || 'Placement') === itCategory)
+        });
+      }
+
       return res.status(404).json({ error: 'Job not found.' });
     }
 
@@ -172,12 +265,23 @@ router.post('/', async (req, res) => {
       createdAt: new Date().toISOString()
     };
 
-    const savedJob = await JobModel.create(newJob);
-    console.log('✅ New Job saved directly into MongoDB Atlas Cloud:', savedJob.id);
-    res.status(201).json(savedJob.toObject());
+    let savedJob = null;
+    if (getIsMongoConnected()) {
+      try {
+        const created = await JobModel.create(newJob);
+        savedJob = created ? created.toObject() : null;
+        console.log('✅ New Job saved directly into MongoDB Atlas Cloud:', newJob.id);
+      } catch (mongoErr) {
+        console.warn('MongoDB create failed, falling back to local memory:', mongoErr.message);
+      }
+    }
+    
+    // Always sync to in-memory/disk store so it is instantly available
+    savedJob = saveJobInMemory(savedJob || newJob);
+    res.status(201).json(savedJob);
   } catch (err) {
-    console.error('Error creating job in MongoDB Atlas:', err);
-    res.status(500).json({ error: 'Failed to save job into MongoDB Atlas.' });
+    console.error('Error creating job:', err);
+    res.status(500).json({ error: 'Failed to save job opening: ' + err.message });
   }
 });
 
@@ -186,15 +290,28 @@ router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const updateObj = { ...req.body, updatedAt: new Date().toISOString() };
-    const updated = await JobModel.findOneAndUpdate({ id }, { $set: updateObj }, { new: true }).lean();
+    let updated = null;
 
-    if (!updated) {
+    if (getIsMongoConnected()) {
+      try {
+        updated = await JobModel.findOneAndUpdate({ id }, { $set: updateObj }, { new: true }).lean();
+      } catch (mongoErr) {
+        console.warn('MongoDB update failed, falling back to local memory:', mongoErr.message);
+      }
+    }
+
+    // Always update in-memory store
+    const memUpdated = updateJobInMemory(id, updateObj);
+    const finalJob = updated || memUpdated;
+
+    if (!finalJob) {
       return res.status(404).json({ error: 'Job opening not found.' });
     }
 
-    res.json(updated);
+    res.json(finalJob);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to update job in MongoDB Atlas.' });
+    console.error('Error updating job:', err);
+    res.status(500).json({ error: 'Failed to update job opening.' });
   }
 });
 
@@ -202,13 +319,19 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const result = await JobModel.deleteOne({ id });
-    if (result.deletedCount === 0) {
-      return res.status(404).json({ error: 'Job opening not found.' });
+    if (getIsMongoConnected()) {
+      try {
+        await JobModel.deleteOne({ id });
+      } catch (mongoErr) {
+        console.warn('MongoDB delete failed, falling back to local memory:', mongoErr.message);
+      }
     }
-    res.json({ message: 'Job opening deleted successfully from MongoDB Atlas.' });
+
+    deleteJobInMemory(id);
+    res.json({ message: 'Job opening deleted successfully.' });
   } catch (err) {
-    res.status(500).json({ error: 'Failed to delete job from MongoDB Atlas.' });
+    console.error('Error deleting job:', err);
+    res.status(500).json({ error: 'Failed to delete job opening.' });
   }
 });
 

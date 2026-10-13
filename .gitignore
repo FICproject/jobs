@@ -6,3 +6,4 @@ build/
 *.log
 .DS_Store
 data_store.json
+.vscode/

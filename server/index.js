@@ -60,6 +60,57 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Recruitment Portal API Server is running.' });
 });
 
+// Candidate APK Download endpoint
+app.get('/api/download/candidate-apk', (req, res) => {
+  const candidateApkPath = path.join(uploadsDir, 'CandidateApp.apk');
+  const rootCandidateApkPath = path.join(__dirname, '..', 'CandidateApp.apk');
+  const builtApkPath = path.join(__dirname, '..', 'candidate_mobile', 'android', 'app', 'build', 'outputs', 'apk', 'release', 'app-release.apk');
+
+  let targetPath = null;
+  if (fs.existsSync(candidateApkPath)) targetPath = candidateApkPath;
+  else if (fs.existsSync(rootCandidateApkPath)) targetPath = rootCandidateApkPath;
+  else if (fs.existsSync(builtApkPath)) targetPath = builtApkPath;
+
+  if (targetPath) {
+    res.setHeader('Content-Type', 'application/vnd.android.package-archive');
+    res.download(targetPath, 'CandidateRecruitPro.apk', (err) => {
+      if (err) console.error('Error downloading Candidate APK:', err);
+    });
+  } else {
+    res.status(404).json({ error: 'Candidate APK not found. Please build or upload the APK.' });
+  }
+});
+
+// IT Training Incentives settings endpoints
+let globalItIncentives = { 'PROCESS 1': 10000, 'PROCESS 2': 15000, 'PROCESS 3': 10000 };
+app.get('/api/settings/it-training-incentives', (req, res) => {
+  res.json(globalItIncentives);
+});
+app.post('/api/settings/it-training-incentives', (req, res) => {
+  globalItIncentives = { ...globalItIncentives, ...req.body };
+  res.json(globalItIncentives);
+});
+
+// Partner Incentives endpoints
+let partnerIncentivesStore = [];
+app.get('/api/partner-incentives', (req, res) => {
+  const { hrId } = req.query;
+  if (hrId) {
+    return res.json(partnerIncentivesStore.filter(p => p.hrId === hrId));
+  }
+  res.json(partnerIncentivesStore);
+});
+app.post('/api/partner-incentives', (req, res) => {
+  const { hrId, jobId } = req.body;
+  const idx = partnerIncentivesStore.findIndex(p => p.hrId === hrId && p.jobId === jobId);
+  if (idx !== -1) {
+    partnerIncentivesStore[idx] = { ...partnerIncentivesStore[idx], ...req.body };
+  } else {
+    partnerIncentivesStore.push(req.body);
+  }
+  res.json({ success: true, item: req.body });
+});
+
 const { connectMongoDB } = require('./db');
 
 // Connect to MongoDB Database

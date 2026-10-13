@@ -1,0 +1,1593 @@
+{
+  "users": [
+    {
+      "id": "usr_admin",
+      "name": "System Admin",
+      "email": "admin@recruitment.com",
+      "passwordHash": "$2a$10$wE47x1KkS4eQ6bH5k6d8u.kZ7z8zY0X1Y2Z3A4B5C6D7E8F9G0H1I",
+      "role": "admin",
+      "createdAt": "2026-10-09T12:41:37.645Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat_banking",
+      "name": "Banking & Financial Services",
+      "description": "Jobs in retail banking, NBFCs, investment, and financial services.",
+      "icon": "Building2",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "cat_it",
+      "name": "IT & Software",
+      "description": "Software engineering, web development, cloud computing, and IT support.",
+      "icon": "Code",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "cat_sales",
+      "name": "Sales & Marketing",
+      "description": "Business development, direct sales, field marketing, and digital marketing.",
+      "icon": "TrendingUp",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "cat_bpo",
+      "name": "BPO & Customer Support",
+      "description": "Inbound/outbound customer support, telesales, and technical desk operations.",
+      "icon": "Headphones",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "cat_nonit",
+      "name": "Non-IT & Operations",
+      "description": "Back-office administration, logistics, HR operations, and store management.",
+      "icon": "Briefcase",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    }
+  ],
+  "companies": [
+    {
+      "id": "comp_axis",
+      "categoryId": "cat_banking",
+      "name": "Axis Bank",
+      "logo": "/logos/axis_bank.svg",
+      "description": "Leading private sector bank in India offering retail, corporate, and international banking services.",
+      "website": "https://www.axisbank.com",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "comp_idfc",
+      "categoryId": "cat_banking",
+      "name": "IDFC First Bank",
+      "logo": "/logos/idfc_first_bank.svg",
+      "description": "Leading Indian private sector bank offering personal, NRI, and business banking products.",
+      "website": "https://www.idfcfirstbank.com",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "comp_kotak",
+      "categoryId": "cat_banking",
+      "name": "Kotak Mahindra Bank",
+      "logo": "/logos/kotak_bank.png",
+      "description": "Premier Indian financial institution providing commercial banking, wealth management, and insurance.",
+      "website": "https://www.kotak.com",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "comp_bandhan",
+      "categoryId": "cat_banking",
+      "name": "Bandhan Bank",
+      "logo": "/logos/bandhan_bank.png",
+      "description": "Indian banking and financial services company headquartered in Kolkata.",
+      "website": "https://www.bandhanbank.com",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "comp_aditya",
+      "categoryId": "cat_banking",
+      "name": "Aditya Birla Capital",
+      "logo": "/logos/aditya_birla.jpg",
+      "description": "Financial services umbrella brand for Aditya Birla Group businesses.",
+      "website": "https://www.adityabirlacapital.com",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "comp_mahindra_fin",
+      "categoryId": "cat_banking",
+      "name": "Mahindra Finance",
+      "logo": "/logos/mahindra_finance.svg",
+      "description": "Leading Non-Banking Financial Company (NBFC) in India specializing in rural and semi-urban financial services.",
+      "website": "https://www.mahindrafinance.com",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "comp_yes_bank",
+      "categoryId": "cat_banking",
+      "name": "YES Bank",
+      "logo": "/logos/Yes_Bank_Logo.jpg",
+      "description": "Full-service commercial bank offering retail, MSME, and corporate banking with a strong digital focus across India.",
+      "website": "https://www.yesbank.in",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "comp_techm",
+      "categoryId": "cat_it",
+      "name": "Tech Mahindra",
+      "logo": "/logos/tech_mahindra.svg",
+      "description": "Global IT services provider offering digital transformation and consulting.",
+      "website": "https://www.techmahindra.com",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job_axis_am",
+      "companyId": "comp_axis",
+      "categoryId": "cat_banking",
+      "title": "Assistance Manager",
+      "jobType": "Full Time",
+      "location": "Chennai / Coimbatore / Madurai",
+      "experience": "0 - 2 Years",
+      "qualification": "Any Graduate / Postgraduate",
+      "salary": "₹3.5 LPA - ₹5.0 LPA",
+      "trainingPeriod": "Phase 1: 15 Days (Classroom Training) / Phase 2: 15 Days (On Job Training - OJT)",
+      "trainingTitle": "30 Days Structured Training",
+      "trainingSubtext": "15 Days Classroom Training | 15 Days On Job Training (OJT)",
+      "stipendTitle": "STIPEND ₹12,000",
+      "stipendSubtext": "₹12,000 per month during training period",
+      "salarySubtext": "Fixed CTC + Performance Incentives",
+      "locationSubtext": "Branch Posting Based on Aadhar Address / Nearby Branch",
+      "trainingFee": "1.6 LPA",
+      "feeRefundType": "100% Placement Guarantee",
+      "feeRefundDetails": "100% money back guarantee upon successful training completion",
+      "openings": 5,
+      "description": "Responsible for driving retail banking operations, customer onboarding, and branch financial services.",
+      "responsibilities": [
+        "Manage retail banking customers and handle everyday branch operational duties.",
+        "Provide advice on banking products including savings, term deposits, and credit services.",
+        "Ensure seamless KYC compliance and customer onboarding workflows."
+      ],
+      "requirements": [
+        "Bachelor’s degree in any discipline (Commerce/Arts/Science/Engineering).",
+        "Strong interpersonal communication and client management skills.",
+        "Willingness to learn banking regulations and financial products."
+      ],
+      "skills": [
+        "Retail Banking",
+        "Customer Relationship",
+        "Branch Operations",
+        "KYC Compliance"
+      ],
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "job_axis_cso",
+      "companyId": "comp_axis",
+      "categoryId": "cat_banking",
+      "title": "Customer Service Officer",
+      "jobType": "Full Time",
+      "location": "Trichy / Salem / Vellore",
+      "experience": "0 - 1 Years",
+      "qualification": "Any Degree",
+      "salary": "₹3.0 LPA - ₹4.2 LPA",
+      "trainingPeriod": "Phase 1: 10 Days Classroom | Phase 2: 10 Days Field Training",
+      "trainingTitle": "20 Days Training",
+      "trainingSubtext": "10 Days Classroom | 10 Days Field Training",
+      "stipendTitle": "STIPEND ₹10,000",
+      "stipendSubtext": "₹10,000 per month during induction",
+      "salarySubtext": "₹3.0 - 4.2 LPA + Quarterly Bonus",
+      "locationSubtext": "Branch Location Near Candidate Residence",
+      "trainingFee": "1.4 LPA",
+      "feeRefundType": "100% Placement Guarantee",
+      "feeRefundDetails": "100% placement assurance with structured refund policy",
+      "openings": 3,
+      "description": "Assist branch walk-in clients, process documentation, and facilitate digital banking adoption.",
+      "responsibilities": [
+        "Greet and guide branch visitors for digital banking kiosks and teller services.",
+        "Resolve client queries related to accounts, transfers, and debit/credit cards."
+      ],
+      "requirements": [
+        "Graduate in any discipline.",
+        "Good spoken English and regional language proficiency."
+      ],
+      "skills": [
+        "Client Support",
+        "Banking Services",
+        "Digital Banking",
+        "Documentation"
+      ],
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "job_idfc_adm",
+      "companyId": "comp_idfc",
+      "categoryId": "cat_banking",
+      "title": "Associate Debt Manager",
+      "jobType": "Full Time",
+      "location": "Trichy / Madurai / Salem",
+      "experience": "0 - 2 Years",
+      "qualification": "Any Graduate",
+      "salary": "₹3.5 LPA - ₹5.0 LPA",
+      "trainingPeriod": "Phase 1: 15 Days Induction / Phase 2: 15 Days Field Immersion",
+      "trainingTitle": "30 Days Program",
+      "trainingSubtext": "15 Days Classroom Training | 15 Days Practical Field Work",
+      "stipendTitle": "STIPEND ₹12,000",
+      "stipendSubtext": "₹12,000 monthly allowance during training",
+      "salarySubtext": "Annual CTC ₹3.5 - 5.0 LPA + Incentives",
+      "locationSubtext": "Home District Allotment",
+      "trainingFee": "1.6 LPA",
+      "feeRefundType": "100% Placement Guarantee",
+      "feeRefundDetails": "100% fee refund upon non-selection guarantee",
+      "openings": 4,
+      "description": "Manage portfolio recoveries, customer relationship management, and retail loan collection compliance.",
+      "responsibilities": [
+        "Engage with retail and MSME loan clients for portfolio management and timely repayment.",
+        "Maintain high standards of ethical banking conduct and RBI compliance."
+      ],
+      "requirements": [
+        "Any Graduate with good communication and negotiation skills.",
+        "Valid two-wheeler and driving license preferred for field visits."
+      ],
+      "skills": [
+        "Loan Portfolio",
+        "Client Relationship",
+        "Financial Management",
+        "Credit Evaluation"
+      ],
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "job_idfc_rm",
+      "companyId": "comp_idfc",
+      "categoryId": "cat_banking",
+      "title": "Relationship Manager - Retail Banking",
+      "jobType": "Full Time",
+      "location": "Chennai / Coimbatore / Bangalore",
+      "experience": "0 - 3 Years",
+      "qualification": "Any Graduate / MBA",
+      "salary": "₹4.0 LPA - ₹6.0 LPA",
+      "trainingPeriod": "Phase 1: 15 Days Classroom / Phase 2: 15 Days Branch Immersion",
+      "trainingTitle": "30 Days Training",
+      "trainingSubtext": "15 Days Classroom | 15 Days Branch Immersion",
+      "stipendTitle": "STIPEND ₹14,000",
+      "stipendSubtext": "₹14,000 monthly stipend during training",
+      "salarySubtext": "₹4.0 - 6.0 LPA + High Commission Structure",
+      "locationSubtext": "Branch Placement based on preference",
+      "trainingFee": "1.8 LPA",
+      "feeRefundType": "100% Placement Guarantee",
+      "feeRefundDetails": "100% Placement Guarantee or Full Refund",
+      "openings": 3,
+      "description": "Acquire and nurture high-net-worth individual (HNI) accounts, wealth products, and fixed deposits.",
+      "responsibilities": [
+        "Drive client acquisition for premium savings accounts, NRI accounts, and wealth advisory.",
+        "Deliver exceptional relationship management and financial advisory support."
+      ],
+      "requirements": [
+        "Graduate or Post Graduate in Finance, Commerce, or Management.",
+        "Excellent verbal communication and relationship building capability."
+      ],
+      "skills": [
+        "Wealth Management",
+        "HNI Acquisition",
+        "CASA Banking",
+        "Portfolio Advisory"
+      ],
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "job_kotak_bro",
+      "companyId": "comp_kotak",
+      "categoryId": "cat_banking",
+      "title": "Branch Relationship Officer",
+      "jobType": "Full Time",
+      "location": "Chennai / Bangalore / Hyderabad",
+      "experience": "0 - 2 Years",
+      "qualification": "Any Graduate / Post Graduate",
+      "salary": "₹3.5 LPA - ₹5.5 LPA",
+      "trainingPeriod": "Phase 1: 15 Days Classroom / Phase 2: 15 Days OJT",
+      "trainingTitle": "30 Days Training Program",
+      "trainingSubtext": "15 Days Classroom Training | 15 Days Branch OJT",
+      "stipendTitle": "STIPEND ₹12,500",
+      "stipendSubtext": "Monthly stipend during onboarding",
+      "salarySubtext": "₹3.5 - 5.5 LPA with performance bonuses",
+      "locationSubtext": "Metropolitan and Tier-1 Branch Locations",
+      "trainingFee": "1.6 LPA",
+      "feeRefundType": "100% Placement Guarantee",
+      "feeRefundDetails": "Complete job guarantee upon successful training completion",
+      "openings": 6,
+      "description": "Responsible for expanding CASA (Current Account & Savings Account) portfolio and cross-selling banking products.",
+      "responsibilities": [
+        "Open new CASA accounts and onboard retail and institutional clients.",
+        "Cross-sell insurance, investment products, and commercial trade accounts."
+      ],
+      "requirements": [
+        "Any Degree holder with an appetite for client interaction and sales.",
+        "Strong drive, goal orientation, and banking ethics."
+      ],
+      "skills": [
+        "CASA Acquisition",
+        "Branch Cross-selling",
+        "Customer Onboarding",
+        "Financial Services"
+      ],
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "job_kotak_am",
+      "companyId": "comp_kotak",
+      "categoryId": "cat_banking",
+      "title": "Acquisition Manager - CASA",
+      "jobType": "Full Time",
+      "location": "Coimbatore / Trichy / Madurai",
+      "experience": "0 - 1 Years",
+      "qualification": "Any Degree",
+      "salary": "₹3.2 LPA - ₹4.8 LPA",
+      "trainingPeriod": "Phase 1: 12 Days Classroom / Phase 2: 12 Days Field",
+      "trainingTitle": "24 Days Induction",
+      "trainingSubtext": "12 Days Classroom | 12 Days Field",
+      "stipendTitle": "STIPEND ₹11,000",
+      "stipendSubtext": "₹11,000 monthly stipend",
+      "salarySubtext": "Base Salary + Uncapped Monthly Incentives",
+      "locationSubtext": "Local Region Branch",
+      "trainingFee": "1.5 LPA",
+      "feeRefundType": "100% Placement Guarantee",
+      "feeRefundDetails": "100% refund guarantee",
+      "openings": 4,
+      "description": "Direct client acquisition for commercial and individual banking accounts across assigned territory.",
+      "responsibilities": [
+        "Meet business owners and individuals to showcase Kotak banking propositions.",
+        "Complete digital KYC paperwork and open savings and current accounts."
+      ],
+      "requirements": [
+        "Graduate in any discipline.",
+        "Enthusiastic attitude with good local geography knowledge."
+      ],
+      "skills": [
+        "Account Acquisition",
+        "Territory Sales",
+        "Field Marketing"
+      ],
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "job_bandhan_be",
+      "companyId": "comp_bandhan",
+      "categoryId": "cat_banking",
+      "title": "Branch Banking Executive",
+      "jobType": "Full Time",
+      "location": "Chennai / Kolkata / Bangalore",
+      "experience": "0 - 2 Years",
+      "qualification": "Graduate in any discipline",
+      "salary": "₹3.0 LPA - ₹4.5 LPA",
+      "trainingPeriod": "Phase 1: 14 Days Training / Phase 2: 14 Days Practical Immersion",
+      "trainingTitle": "28 Days Comprehensive Training",
+      "trainingSubtext": "14 Days Classroom | 14 Days Practical Immersion",
+      "stipendTitle": "STIPEND ₹10,000",
+      "stipendSubtext": "₹10,000 monthly allowance",
+      "salarySubtext": "₹3.0 - 4.5 LPA Fixed + Annual Bonus",
+      "locationSubtext": "Selected based on candidate home district",
+      "trainingFee": "1.5 LPA",
+      "feeRefundType": "100% Placement Guarantee",
+      "feeRefundDetails": "100% placement refund guarantee",
+      "openings": 5,
+      "description": "Manage retail banking transactions, micro-credit accounts, and customer savings growth.",
+      "responsibilities": [
+        "Assist branch operations including deposits, withdrawals, and account management.",
+        "Promote micro-banking, fixed deposits, and recurring deposit savings schemes."
+      ],
+      "requirements": [
+        "Any Degree with proficiency in basic computers and mathematics.",
+        "Friendly communication skills and client-first attitude."
+      ],
+      "skills": [
+        "Branch Banking",
+        "Retail Operations",
+        "Cash Handling",
+        "Customer Service"
+      ],
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "job_aditya_dso",
+      "companyId": "comp_aditya",
+      "categoryId": "cat_banking",
+      "title": "Direct Sales Officer - Insurance & Wealth",
+      "jobType": "Full Time",
+      "location": "Chennai / Coimbatore",
+      "experience": "0 - 2 Years",
+      "qualification": "Any Degree",
+      "salary": "₹3.2 LPA - ₹4.8 LPA",
+      "trainingPeriod": "Phase 1: 10 Days Product Training / Phase 2: 10 Days OJT",
+      "trainingTitle": "20 Days Intensive Training",
+      "trainingSubtext": "10 Days Product Training | 10 Days Field OJT",
+      "stipendTitle": "STIPEND ₹11,000",
+      "stipendSubtext": "₹11,000 stipend during training",
+      "salarySubtext": "₹3.2 - 4.8 LPA + Incentive Structure",
+      "locationSubtext": "Branch and Direct Channel Location",
+      "trainingFee": "1.5 LPA",
+      "feeRefundType": "100% Placement Guarantee",
+      "feeRefundDetails": "100% money back guarantee",
+      "openings": 4,
+      "description": "Direct channel sales for Aditya Birla life insurance, investment, and health insurance plans.",
+      "responsibilities": [
+        "Connect with pre-assigned leads to understand life protection and investment goals.",
+        "Recommend suitable term insurance and guaranteed savings policies."
+      ],
+      "requirements": [
+        "Graduate in any discipline.",
+        "Good negotiation, explanation, and presentation skills."
+      ],
+      "skills": [
+        "Insurance Sales",
+        "Financial Planning",
+        "Direct Channel",
+        "Lead Conversion"
+      ],
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "job_aditya_ara",
+      "companyId": "comp_aditya",
+      "categoryId": "cat_banking",
+      "title": "Agency Relationship Associate",
+      "jobType": "Full Time",
+      "location": "Madurai / Trichy / Salem",
+      "experience": "0 - 2 Years",
+      "qualification": "Any Graduate",
+      "salary": "₹3.0 LPA - ₹4.5 LPA",
+      "trainingPeriod": "Phase 1: 15 Days Agency Training / Phase 2: 15 Days Field Deployment",
+      "trainingTitle": "30 Days Training",
+      "trainingSubtext": "15 Days Classroom | 15 Days Deployment",
+      "stipendTitle": "STIPEND ₹10,500",
+      "stipendSubtext": "Monthly allowance during training",
+      "salarySubtext": "Fixed CTC + Attractive Agency Multipliers",
+      "locationSubtext": "Local City Agency Office",
+      "trainingFee": "1.4 LPA",
+      "feeRefundType": "100% Placement Guarantee",
+      "feeRefundDetails": "100% Placement Guarantee or Full Refund",
+      "openings": 3,
+      "description": "Recruit and manage financial advisors, drive life insurance business and team targets.",
+      "responsibilities": [
+        "Recruit, train, and mentor life insurance advisors and financial agents.",
+        "Drive monthly agency sales productivity and client satisfaction."
+      ],
+      "requirements": [
+        "Graduate in any field.",
+        "Leadership, team building, and motivational ability."
+      ],
+      "skills": [
+        "Agency Management",
+        "Team Leadership",
+        "Sales Coaching",
+        "Recruitment"
+      ],
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "job_aditya_be",
+      "companyId": "comp_aditya",
+      "categoryId": "cat_banking",
+      "title": "Bancassurance Executive",
+      "jobType": "Full Time",
+      "location": "Bangalore / Chennai / Coimbatore",
+      "experience": "0 - 3 Years",
+      "qualification": "Graduate / Post Graduate",
+      "salary": "₹3.5 LPA - ₹5.2 LPA",
+      "trainingPeriod": "Phase 1: 14 Days Classroom / Phase 2: 14 Days Partner Branch OJT",
+      "trainingTitle": "28 Days Structured Training",
+      "trainingSubtext": "14 Days Classroom | 14 Days Partner Branch OJT",
+      "stipendTitle": "STIPEND ₹12,000",
+      "stipendSubtext": "₹12,000 monthly allowance",
+      "salarySubtext": "₹3.5 - 5.2 LPA + Partner Incentives",
+      "locationSubtext": "Partner Bank Branch Allotment",
+      "trainingFee": "1.6 LPA",
+      "feeRefundType": "100% Placement Guarantee",
+      "feeRefundDetails": "100% money back guarantee on non-placement",
+      "openings": 4,
+      "description": "Partner with affiliated bank branches to offer wealth and insurance products to bank customers.",
+      "responsibilities": [
+        "Stationed at designated partner bank branches to assist walk-in customers.",
+        "Coordinate with branch managers to pitch insurance and investment solutions."
+      ],
+      "requirements": [
+        "Degree in Commerce, Management, or related field.",
+        "Polite customer interaction and banking acumen."
+      ],
+      "skills": [
+        "Bancassurance",
+        "Partner Relations",
+        "Investment Advisory"
+      ],
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "job_mahindra_so",
+      "companyId": "comp_mahindra_fin",
+      "categoryId": "cat_banking",
+      "title": "Sales Officer - Rural Finance",
+      "jobType": "Full Time",
+      "location": "Trichy / Salem / Vellore",
+      "experience": "0 - 3 Years",
+      "qualification": "Graduate in any discipline",
+      "salary": "₹3.0 LPA - ₹4.5 LPA",
+      "trainingPeriod": "Phase 1: 10 Days Training / Phase 2: 10 Days Field Immersion",
+      "trainingTitle": "20 Days Training",
+      "trainingSubtext": "10 Days Training | 10 Days Field Immersion",
+      "stipendTitle": "STIPEND ₹10,000",
+      "stipendSubtext": "₹10,000 during training phase",
+      "salarySubtext": "₹3.0 - 4.5 LPA + Performance Incentives",
+      "locationSubtext": "Rural / Semi-urban Branch Office",
+      "trainingFee": "1.4 LPA",
+      "feeRefundType": "100% Placement Guarantee",
+      "feeRefundDetails": "100% fee refund upon completion",
+      "openings": 3,
+      "description": "Handle vehicle financing, tractor loans, and rural customer relationship management.",
+      "responsibilities": [
+        "Source vehicle finance and tractor loan inquiries from dealerships and farmers.",
+        "Verify documentation and guide borrowers through the loan sanction process."
+      ],
+      "requirements": [
+        "Graduate in any stream.",
+        "Familiarity with rural dynamics, tractor/auto finance."
+      ],
+      "skills": [
+        "Vehicle Finance",
+        "Rural Banking",
+        "Credit Appraisal",
+        "Field Sales"
+      ],
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "job_yes_bank",
+      "companyId": "comp_yes_bank",
+      "categoryId": "cat_banking",
+      "title": "Banking Operations Executive",
+      "jobType": "Full Time",
+      "location": "Chennai / Bangalore / Coimbatore",
+      "experience": "0 - 2 Years",
+      "qualification": "Any Graduate / Post Graduate",
+      "salary": "₹3.5 LPA - ₹5.0 LPA",
+      "trainingPeriod": "Phase 1: 15 Days Digital Banking / Phase 2: 15 Days Branch OJT",
+      "trainingTitle": "30 Days Induction",
+      "trainingSubtext": "15 Days Digital Banking | 15 Days Branch OJT",
+      "stipendTitle": "STIPEND ₹12,000",
+      "stipendSubtext": "₹12,000 monthly stipend during training",
+      "salarySubtext": "₹3.5 - 5.0 LPA CTC",
+      "locationSubtext": "YES Bank Branch near candidate residence",
+      "trainingFee": "1.6 LPA",
+      "feeRefundType": "100% Placement Guarantee",
+      "feeRefundDetails": "100% Placement Guarantee or Full Refund",
+      "openings": 2,
+      "description": "Manage retail banking operations, digital banking assistance, and customer transactions.",
+      "responsibilities": [
+        "Execute daily branch operational tasks, account servicing, and digital kiosk assistance.",
+        "Explain fixed deposits, saving schemes, and mobile banking features to customers."
+      ],
+      "requirements": [
+        "Graduate in Commerce, Management, or Science.",
+        "High accuracy in operational paperwork and friendly client manners."
+      ],
+      "skills": [
+        "Retail Operations",
+        "Digital Banking",
+        "Client Servicing",
+        "KYC Verification"
+      ],
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    }
+  ],
+  "candidates": [
+    {
+      "_id": "6ac9c49105513801da5fdb96",
+      "id": "cand_1791607953699",
+      "userId": "usr_candidate",
+      "name": "Anand Kumar",
+      "email": "anand.kumar@example.com",
+      "mobile": "9876543210",
+      "location": "Chennai",
+      "qualification": "DOB: 15/08/1999",
+      "experience": "Fresher",
+      "skills": [],
+      "resumeUrl": "",
+      "createdAt": "2026-10-10T04:52:33.699Z",
+      "__v": 0,
+      "dob": "15/08/1999"
+    },
+    {
+      "id": "cand_1791549781924",
+      "userId": "usr_guest",
+      "name": "Priya Nair",
+      "email": "priya@gmail.com",
+      "mobile": "9876501234",
+      "location": "ChennaifpriyChennaifpriya.nair@gmail.comnair@gmail.com",
+      "qualification": "",
+      "experience": "Fresher",
+      "skills": [],
+      "resumeUrl": "",
+      "createdAt": "2026-10-09T12:43:01.924Z"
+    }
+  ],
+  "applications": [
+    {
+      "id": "app_1791616785114",
+      "applicationNumber": "JOB-617585",
+      "candidateId": "cand_1791607953699",
+      "jobId": "job_1789883748252",
+      "companyId": "comp_axis",
+      "categoryId": "cat_banking",
+      "candidateDetails": {
+        "userId": "usr_candidate_dhanu",
+        "name": "Dhanu TestCandidate",
+        "email": "dhanu.test@example.com",
+        "mobile": "9876543210",
+        "location": "Chennai",
+        "city": "Chennai",
+        "qualification": "DOB: 15/08/1999",
+        "experience": "Fresher",
+        "dob": "15/08/1999"
+      },
+      "candidateName": "Dhanu TestCandidate",
+      "candidateEmail": "dhanu.test@example.com",
+      "candidateMobile": "9876543210",
+      "candidateLocation": "Chennai",
+      "candidateQualification": "DOB: 15/08/1999",
+      "candidateExperience": "Fresher",
+      "candidateDob": "15/08/1999",
+      "dob": "15/08/1999",
+      "status": "Applied",
+      "referredBy": null,
+      "paymentId": "PAY_TEST_1791616784860",
+      "paymentAmount": 49,
+      "appliedAt": "2026-10-10T07:19:45.114Z",
+      "adminNotes": "",
+      "updatedAt": "2026-10-10T07:19:45.114Z",
+      "_id": "6ac9e711093ab103e39e2519",
+      "candidateResumeUrl": "",
+      "__v": 0
+    },
+    {
+      "id": "app_1791549781927",
+      "applicationNumber": "JOB-577487",
+      "candidateId": "cand_1791549781924",
+      "jobId": "job_yes_bank",
+      "companyId": "comp_yes_bank",
+      "categoryId": "cat_banking",
+      "status": "Applied",
+      "appliedAt": "2026-10-09T12:43:01.927Z",
+      "adminNotes": "",
+      "referredBy": null,
+      "paymentId": "pay_TloNlnzO8H26V8",
+      "paymentAmount": 49,
+      "updatedAt": "2026-10-09T12:43:01.927Z"
+    }
+  ],
+  "interviews": [],
+  "itTrainingProcesses": [
+    {
+      "id": "it_proc_1",
+      "processName": "PROCESS 1",
+      "programTitle": "FIC IT Training & 100% Placement Programme",
+      "role": "Software Engineer Trainee",
+      "salary": "3.5 - 4.5 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months Classroom Training | 3 Months Real Project Training",
+      "stipend": "12,000",
+      "stipendSubtext": "Stipend ₹12,000 per month during training",
+      "trainingFee": "1.6 LPA",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "1 Year Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "Comprehensive software development track covering Full Stack technologies, live customer projects, and guaranteed placement.",
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Screening & Registration",
+          "description": "Application review and initial profile shortlisting"
+        },
+        {
+          "stepNumber": 2,
+          "title": "Technical Assessment",
+          "description": "Basic coding, problem solving and aptitude round"
+        },
+        {
+          "stepNumber": 3,
+          "title": "Technical & HR Interview",
+          "description": "Discussion with hiring manager & interview clearance"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Batch Onboarding",
+          "description": "Offer letter issuance, document submission, and training commencement"
+        }
+      ],
+      "order": 1,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_2",
+      "processName": "PROCESS 2",
+      "programTitle": "FIC IT Training & Placement - Advanced Track",
+      "role": "Software Developer Trainee",
+      "salary": "4.5 - 6.0 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months Classroom Training | 3 Months Enterprise Project OJT",
+      "stipend": "12,000",
+      "stipendSubtext": "Stipend ₹12,000 per month during training",
+      "trainingFee": "2.0 LPA",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "2 Years Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "Advanced engineering track focusing on Cloud, Full Stack, and Enterprise solutions with high-tier placement.",
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Screening & Registration",
+          "description": "Application review and initial profile shortlisting"
+        },
+        {
+          "stepNumber": 2,
+          "title": "Technical Assessment",
+          "description": "Coding & core concepts evaluation"
+        },
+        {
+          "stepNumber": 3,
+          "title": "Technical & HR Interview",
+          "description": "Technical panel interview and HR discussion"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Batch Onboarding",
+          "description": "Offer issuance, original documents handover, and training start"
+        }
+      ],
+      "order": 2,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_3",
+      "processName": "PROCESS 1",
+      "programTitle": "FIC IT Full Stack Development Track",
+      "role": "Full Stack Developer",
+      "salary": "4.5 - 6.5 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months Frontend & Backend Training | 3 Months Enterprise Live Projects",
+      "stipend": "12,000",
+      "stipendSubtext": "Stipend ₹12,000 per month during training",
+      "trainingFee": "1.6 LPA",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "1 Year Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "Full Stack engineering program covering React, Node.js, databases, microservices and enterprise application development.",
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Online Application & Screening",
+          "description": "Resume review and initial candidate evaluation"
+        },
+        {
+          "stepNumber": 2,
+          "title": "Full Stack Coding Challenge",
+          "description": "Practical coding & problem solving assessment"
+        },
+        {
+          "stepNumber": 3,
+          "title": "Technical Discussion",
+          "description": "One-on-one interview with lead architect"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Offer & Onboarding",
+          "description": "Admission clearance and training batch assignment"
+        }
+      ],
+      "order": 3,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_4",
+      "processName": "PROCESS 2",
+      "programTitle": "FIC IT Full Stack Advanced Placement",
+      "role": "Full Stack Developer",
+      "salary": "5.5 - 7.5 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months Cloud & Architecture Specialization | 3 Months Client Deployment",
+      "stipend": "15,000",
+      "stipendSubtext": "Stipend ₹15,000 per month during training",
+      "trainingFee": "2.0 LPA",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "2 Years Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "Specialized enterprise full stack track with cloud architecture, DevOps, and tier-1 product firm placement.",
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Profile Shortlisting",
+          "description": "Education & project review"
+        },
+        {
+          "stepNumber": 2,
+          "title": "Advanced Coding Assessment",
+          "description": "Full stack live implementation test"
+        },
+        {
+          "stepNumber": 3,
+          "title": "Architecture Interview",
+          "description": "System design and team fit round"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Onboarding & Deployment",
+          "description": "Contract sign-off, document submission & training"
+        }
+      ],
+      "order": 4,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_5",
+      "processName": "PROCESS 1",
+      "programTitle": "FIC IT MERN Stack Development Program",
+      "role": "MERN Stack Developer",
+      "salary": "4.0 - 6.0 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months MongoDB, Express, React, Node.js Intensive | 3 Months Industry Projects",
+      "stipend": "12,000",
+      "stipendSubtext": "Stipend ₹12,000 per month during training",
+      "trainingFee": "1.6 LPA",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "1 Year Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "Modern JavaScript stack specialization building single page applications, RESTful APIs, and scalable web apps.",
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Screening & Registration",
+          "description": "Profile and degree verification"
+        },
+        {
+          "stepNumber": 2,
+          "title": "JavaScript & React Assessment",
+          "description": "Modern JS fundamentals and logic test"
+        },
+        {
+          "stepNumber": 3,
+          "title": "Technical Evaluation",
+          "description": "Discussion on web architecture and portfolio"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Batch Allocation",
+          "description": "Documentation and training commencement"
+        }
+      ],
+      "order": 5,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_6",
+      "processName": "PROCESS 2",
+      "programTitle": "FIC IT MERN Stack Enterprise Track",
+      "role": "MERN Stack Developer",
+      "salary": "5.0 - 7.0 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months Enterprise React, Next.js & Node Microservices | 3 Months Live Production App",
+      "stipend": "14,000",
+      "stipendSubtext": "Stipend ₹14,000 per month during training",
+      "trainingFee": "1.9 LPA",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "2 Years Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "Advanced MERN stack with Next.js, GraphQL, Redis, and high-performance cloud deployment.",
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Screening",
+          "description": "Profile review"
+        },
+        {
+          "stepNumber": 2,
+          "title": "Hands-on Coding Round",
+          "description": "React & API integration task"
+        },
+        {
+          "stepNumber": 3,
+          "title": "Tech Panel Interview",
+          "description": "In-depth frontend and backend evaluation"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Batch Onboarding",
+          "description": "Final onboarding and training start"
+        }
+      ],
+      "order": 6,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_7",
+      "processName": "PROCESS 1",
+      "programTitle": "FIC IT Java Enterprise Training Track",
+      "role": "Java Developer",
+      "salary": "4.2 - 6.2 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months Core & Advanced Java, Spring Boot | 3 Months Enterprise Banking/Fintech Project",
+      "stipend": "12,000",
+      "stipendSubtext": "Stipend ₹12,000 per month during training",
+      "trainingFee": "1.6 LPA",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "1 Year Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "Enterprise backend development with Java, Spring Boot, Hibernate, microservices architecture, and SQL.",
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Registration & Screening",
+          "description": "Academic review and eligibility check"
+        },
+        {
+          "stepNumber": 2,
+          "title": "Core Java Assessment",
+          "description": "OOPs concepts, data structures and algorithms"
+        },
+        {
+          "stepNumber": 3,
+          "title": "Technical Interview",
+          "description": "Interview with Java technical lead"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Offer Issuance & Training",
+          "description": "Agreement sign-off and batch induction"
+        }
+      ],
+      "order": 7,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_8",
+      "processName": "PROCESS 2",
+      "programTitle": "FIC IT Java Microservices & Cloud Track",
+      "role": "Java Developer",
+      "salary": "5.2 - 7.2 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months Spring Cloud, Kafka, Docker & Kubernetes | 3 Months Production FinTech App",
+      "stipend": "15,000",
+      "stipendSubtext": "Stipend ₹15,000 per month during training",
+      "trainingFee": "2.0 LPA",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "2 Years Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "High-scale distributed systems in Java with Spring Cloud, Kafka event streams, and cloud-native Kubernetes deployment.",
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Candidate Profile Screening",
+          "description": "Qualification verification"
+        },
+        {
+          "stepNumber": 2,
+          "title": "System Logic & Java Coding",
+          "description": "Backend service coding assessment"
+        },
+        {
+          "stepNumber": 3,
+          "title": "Senior Architect Interview",
+          "description": "Microservices and database concepts discussion"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Batch Onboarding",
+          "description": "Document handover & training commencement"
+        }
+      ],
+      "order": 8,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_9",
+      "processName": "PROCESS 1",
+      "programTitle": "FIC IT Python & Backend Development Track",
+      "role": "Python Developer",
+      "salary": "4.0 - 6.0 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months Python, Django & FastAPI | 3 Months Live Data & Web Services Project",
+      "stipend": "12,000",
+      "stipendSubtext": "Stipend ₹12,000 per month during training",
+      "trainingFee": "1.6 LPA",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "1 Year Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "Robust Python backend development with Django, FastAPI, PostgreSQL, asynchronous workflows, and API design.",
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Profile Shortlisting",
+          "description": "Resume and credentials check"
+        },
+        {
+          "stepNumber": 2,
+          "title": "Python Fundamentals Assessment",
+          "description": "Scripting, logic, and data handling test"
+        },
+        {
+          "stepNumber": 3,
+          "title": "Technical Interview",
+          "description": "Backend interview with engineering lead"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Induction & Training Start",
+          "description": "Offer release and program orientation"
+        }
+      ],
+      "order": 9,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_10",
+      "processName": "PROCESS 2",
+      "programTitle": "FIC IT Python Data & AI/ML Engineering Track",
+      "role": "Python Developer",
+      "salary": "5.0 - 7.0 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months Advanced Python, Pandas, Machine Learning & Cloud APIs | 3 Months Industry ML Pipeline",
+      "stipend": "14,000",
+      "stipendSubtext": "Stipend ₹14,000 per month during training",
+      "trainingFee": "1.9 LPA",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "2 Years Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "Data-intensive Python development with automated data pipelines, ML model deployment, and cloud integration.",
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Screening Round",
+          "description": "Academic and background assessment"
+        },
+        {
+          "stepNumber": 2,
+          "title": "Python & Data Structures Test",
+          "description": "Practical coding challenge"
+        },
+        {
+          "stepNumber": 3,
+          "title": "Lead Panel Discussion",
+          "description": "Architecture, APIs and project discussion"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Onboarding & Batch Start",
+          "description": "Final onboarding and session launch"
+        }
+      ],
+      "order": 10,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_fs_3",
+      "processName": "PROCESS 3",
+      "programTitle": "FIC IT Full Stack - Global Placement & Cloud Track",
+      "role": "Full Stack Developer",
+      "salary": "6.5 - 9.0 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months Advanced Architecture & Microservices | 3 Months US/Client Live Production OJT",
+      "stipend": "18,000",
+      "stipendSubtext": "Stipend ₹18,000 per month during training",
+      "trainingFee": "2.4 LPA (100% Placement Guarantee)",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "2 Years Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "Elite Full Stack engineering track specializing in Distributed Cloud Architecture, DevOps, and tier-1 product firm placement.",
+      "trainingPhases": [
+        {
+          "title": "Phase 1: Full Stack Architecture & Microservices",
+          "duration": "3 Months",
+          "mode": "Classroom & System Design Labs",
+          "stipend": "STIPEND ₹18,000"
+        },
+        {
+          "title": "Phase 2: Global Client Live Production Deployment",
+          "duration": "3 Months",
+          "mode": "Enterprise Live Project (OJT)",
+          "stipend": "STIPEND ₹18,000"
+        }
+      ],
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Profile & Code Review",
+          "description": "GitHub / portfolio and credentials screening"
+        },
+        {
+          "stepNumber": 2,
+          "title": "Live Architecture Assessment",
+          "description": "System design and algorithmic challenge"
+        },
+        {
+          "stepNumber": 3,
+          "title": "Executive Panel Interview",
+          "description": "Director & technical architect interview"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Offer Letter & Onboarding",
+          "description": "Contract sign-off, document submission & training"
+        }
+      ],
+      "order": 11,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_mern_3",
+      "processName": "PROCESS 3",
+      "programTitle": "FIC IT MERN Stack - Next.js & Cloud Native Track",
+      "role": "MERN Stack Developer",
+      "salary": "6.0 - 8.5 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months Full Stack JS & Cloud Architecture | 3 Months Enterprise Product Deployment",
+      "stipend": "16,000",
+      "stipendSubtext": "Stipend ₹16,000 per month during training",
+      "trainingFee": "2.2 LPA (100% Placement Guarantee)",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "2 Years Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "Advanced MERN Stack development with Next.js, GraphQL, Redis caching, CI/CD, and high-performance cloud deployment.",
+      "trainingPhases": [
+        {
+          "title": "Phase 1: Advanced MERN & TypeScript",
+          "duration": "3 Months",
+          "mode": "Classroom & Coding Labs",
+          "stipend": "STIPEND ₹16,000"
+        },
+        {
+          "title": "Phase 2: Cloud Native Microservices OJT",
+          "duration": "3 Months",
+          "mode": "Real Project Training (OJT)",
+          "stipend": "STIPEND ₹16,000"
+        }
+      ],
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Screening & Registration",
+          "description": "Application review and portfolio verification"
+        },
+        {
+          "stepNumber": 2,
+          "title": "MERN Hands-on Coding Challenge",
+          "description": "React, Node.js and API building test"
+        },
+        {
+          "stepNumber": 3,
+          "title": "Technical & Architecture Interview",
+          "description": "Discussion on scalability and full stack patterns"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Batch Onboarding",
+          "description": "Offer issuance, original documents handover, and training start"
+        }
+      ],
+      "order": 12,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_java_3",
+      "processName": "PROCESS 3",
+      "programTitle": "FIC IT Java - Distributed Banking & FinTech Track",
+      "role": "Java Developer",
+      "salary": "6.5 - 9.0 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months Spring Cloud, Kafka & Kubernetes | 3 Months Tier-1 FinTech Implementation OJT",
+      "stipend": "18,000",
+      "stipendSubtext": "Stipend ₹18,000 per month during training",
+      "trainingFee": "2.4 LPA (100% Placement Guarantee)",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "2 Years Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "High-scale distributed systems in Java with Spring Cloud, Kafka event streaming, and cloud-native Kubernetes deployment.",
+      "trainingPhases": [
+        {
+          "title": "Phase 1: Enterprise Java & Microservices",
+          "duration": "3 Months",
+          "mode": "Classroom & System Design",
+          "stipend": "STIPEND ₹18,000"
+        },
+        {
+          "title": "Phase 2: Banking & FinTech Systems OJT",
+          "duration": "3 Months",
+          "mode": "Live Production OJT",
+          "stipend": "STIPEND ₹18,000"
+        }
+      ],
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Academic & Profile Screening",
+          "description": "Degree & basic concepts verification"
+        },
+        {
+          "stepNumber": 2,
+          "title": "Core Java & Data Structures Round",
+          "description": "Practical coding challenge"
+        },
+        {
+          "stepNumber": 3,
+          "title": "System Architecture Interview",
+          "description": "Senior technical panel interview"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Batch Onboarding & Induction",
+          "description": "Offer issuance and training batch start"
+        }
+      ],
+      "order": 13,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_py_3",
+      "processName": "PROCESS 3",
+      "programTitle": "FIC IT Python - Generative AI & Data Systems Track",
+      "role": "Python Developer",
+      "salary": "6.0 - 8.5 LPA",
+      "location": "PAN INDIA / Chennai / Bangalore",
+      "trainingPeriod": "6 Months",
+      "trainingSubtext": "3 Months Python, FastAPI, LLM & Data Pipelines | 3 Months Enterprise AI Pipeline OJT",
+      "stipend": "16,000",
+      "stipendSubtext": "Stipend ₹16,000 per month during training",
+      "trainingFee": "2.2 LPA (100% Placement Guarantee)",
+      "feeSubtext": "Training Program Cost",
+      "bondPeriod": "2 Years Bond",
+      "originalsRequired": "Originals Need to Submit",
+      "description": "Data-intensive Python development with automated data pipelines, LLM fine-tuning, ML model deployment, and cloud integration.",
+      "trainingPhases": [
+        {
+          "title": "Phase 1: Advanced Python & AI Engineering",
+          "duration": "3 Months",
+          "mode": "Classroom & AI Labs",
+          "stipend": "STIPEND ₹16,000"
+        },
+        {
+          "title": "Phase 2: Live AI/ML Cloud Pipeline OJT",
+          "duration": "3 Months",
+          "mode": "Enterprise Project OJT",
+          "stipend": "STIPEND ₹16,000"
+        }
+      ],
+      "selectionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "Profile & Resume Screening",
+          "description": "Background and credentials evaluation"
+        },
+        {
+          "stepNumber": 2,
+          "title": "Python & Problem Solving Test",
+          "description": "Hands-on coding and algorithmic round"
+        },
+        {
+          "stepNumber": 3,
+          "title": "AI Engineering Panel Interview",
+          "description": "Technical lead discussion on models and APIs"
+        },
+        {
+          "stepNumber": 4,
+          "title": "Batch Onboarding & Launch",
+          "description": "Final onboarding and batch induction"
+        }
+      ],
+      "order": 14,
+      "itCategory": "Placement",
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_intern_1",
+      "processName": "PROCESS 1",
+      "itCategory": "Internship",
+      "programTitle": "FIC Free Full Stack Internship Program",
+      "role": "Full Stack Developer",
+      "salary": "Stipend: ₹0",
+      "location": "PAN INDIA / Online",
+      "trainingPeriod": "3 Months",
+      "trainingSubtext": "3 Months Live Enterprise Projects & Code Reviews",
+      "stipend": "0",
+      "stipendSubtext": "100% Free Internship - Zero Cost",
+      "trainingFee": "100% FREE",
+      "feeSubtext": "Zero Cost • Real Experience",
+      "bondPeriod": "No Bond",
+      "originalsRequired": "Not Required",
+      "description": "Work on live production web apps using React, Node.js, and databases alongside experienced software leads. Build real portfolio projects without paying any fees.",
+      "responsibilities": [
+        "Build features for real-world full stack applications with React and Node.js.",
+        "Collaborate with senior developers on GitHub workflows, pull requests, and code reviews.",
+        "Implement responsive user interfaces and backend REST API integrations.",
+        "Receive certificate of internship completion and performance recommendations."
+      ],
+      "requirements": [
+        "Any Degree (B.E, B.Tech, B.Sc, BCA, MCA, M.Tech) or currently studying.",
+        "Basic familiarity with web technologies (HTML, CSS, JavaScript).",
+        "Passion for software development and willingness to commit to project deadlines."
+      ],
+      "order": 20,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_intern_2",
+      "processName": "PROCESS 1",
+      "itCategory": "Internship",
+      "programTitle": "FIC Free Python & AI Engineering Internship",
+      "role": "Python Developer",
+      "salary": "Stipend: ₹0",
+      "location": "PAN INDIA / Online",
+      "trainingPeriod": "3 Months",
+      "trainingSubtext": "3 Months Hands-on Data & Web Pipeline Development",
+      "stipend": "0",
+      "stipendSubtext": "100% Free Internship - Zero Cost",
+      "trainingFee": "100% FREE",
+      "feeSubtext": "Zero Cost • Real Experience",
+      "bondPeriod": "No Bond",
+      "originalsRequired": "Not Required",
+      "description": "Hands-on live project internship in Python, Django/FastAPI, API integrations, and machine learning pipelines under industry mentorship.",
+      "responsibilities": [
+        "Develop Python backend endpoints and data manipulation scripts.",
+        "Integrate third-party REST APIs and work with relational/NoSQL databases.",
+        "Participate in machine learning dataset preparation and API deployment pipelines.",
+        "Earn industry experience letter and technical mentor recommendation."
+      ],
+      "requirements": [
+        "Any Degree (B.E, B.Tech, B.Sc, BCA, MCA, M.Tech) or final year student.",
+        "Foundational knowledge of Python syntax, logic, and data handling.",
+        "Curiosity about data pipelines, artificial intelligence, and cloud APIs."
+      ],
+      "order": 21,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_intern_3",
+      "processName": "PROCESS 1",
+      "itCategory": "Internship",
+      "programTitle": "FIC Free Java Enterprise Development Internship",
+      "role": "Java Developer",
+      "salary": "Stipend: ₹0",
+      "location": "PAN INDIA / Online",
+      "trainingPeriod": "3 Months",
+      "trainingSubtext": "3 Months Real Industry Backend Services Project",
+      "stipend": "0",
+      "stipendSubtext": "100% Free Internship - Zero Cost",
+      "trainingFee": "100% FREE",
+      "feeSubtext": "Zero Cost • Real Experience",
+      "bondPeriod": "No Bond",
+      "originalsRequired": "Not Required",
+      "description": "Real industry experience building Java, Spring Boot microservices, REST APIs, and database transactions in commercial projects.",
+      "responsibilities": [
+        "Implement enterprise Java services using Spring Boot and Hibernate.",
+        "Write clean unit tests, API documentations, and handle database migrations.",
+        "Troubleshoot bugs and optimize microservices performance under lead architect guidance.",
+        "Gain verified hands-on industry project experience."
+      ],
+      "requirements": [
+        "Any Graduate or student with computer science/IT interest.",
+        "Core Java fundamentals and OOP principles understanding.",
+        "Eagerness to learn Spring Boot and enterprise patterns."
+      ],
+      "order": 22,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_intern_4",
+      "processName": "PROCESS 1",
+      "itCategory": "Internship",
+      "programTitle": "FIC Free Software Engineer Internship",
+      "role": "Software Engineer Trainee",
+      "salary": "Stipend: ₹0",
+      "location": "PAN INDIA / Online",
+      "trainingPeriod": "3 Months",
+      "trainingSubtext": "3 Months Full Software Development Lifecycle",
+      "stipend": "0",
+      "stipendSubtext": "100% Free Internship - Zero Cost",
+      "trainingFee": "100% FREE",
+      "feeSubtext": "Zero Cost • Real Experience",
+      "bondPeriod": "No Bond",
+      "originalsRequired": "Not Required",
+      "description": "Join our exclusive 100% Free Internship program. Work on live industry projects alongside experienced developers without paying any fees.",
+      "responsibilities": [
+        "Collaborate on client software delivery and production release cycles.",
+        "Gain end-to-end exposure to agile development, Jira tickets, and GitHub.",
+        "Build features across front-end and back-end modules.",
+        "Receive industry verified internship credentials."
+      ],
+      "requirements": [
+        "Any Degree (B.E, B.Tech, B.Sc, BCA, MCA, M.Tech) with interest in IT careers.",
+        "Basic logical thinking, computer fundamentals, and readiness to learn."
+      ],
+      "order": 23,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_course_1",
+      "processName": "PROCESS 1",
+      "itCategory": "Course",
+      "programTitle": "FIC Full Stack Web Development Master Course",
+      "role": "Full Stack Developer",
+      "salary": "Career Support & Certificate",
+      "location": "Online",
+      "trainingPeriod": "3 Months",
+      "trainingSubtext": "3 Months Modern MERN / Full Stack Curriculum",
+      "stipend": "0",
+      "stipendSubtext": "Practical Training & Project Portfolio",
+      "trainingFee": "₹15,000 (One-time payment)",
+      "feeSubtext": "Course Fees (One-time payment)",
+      "bondPeriod": "No Bond",
+      "originalsRequired": "Not Required",
+      "description": "Master HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, and Git. Build 5+ portfolio projects with code reviews and certificate.",
+      "responsibilities": [
+        "Comprehensive curriculum: Modern HTML5, CSS3, ES6+ JavaScript, React.js & Redux.",
+        "Backend mastery: Node.js, Express REST APIs, MongoDB, Authentication & JWT.",
+        "Deployment & Cloud: Docker fundamentals, Vercel, AWS deployment and CI/CD pipelines.",
+        "Portfolio preparation: Build 5 production-grade applications for your resume."
+      ],
+      "requirements": [
+        "Any Degree (B.E, B.Tech, B.Sc, BCA, MCA, M.Tech) or working professionals.",
+        "No prior coding experience required; beginners welcome.",
+        "A laptop/PC with internet connection and commitment to practice."
+      ],
+      "order": 30,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_course_2",
+      "processName": "PROCESS 1",
+      "itCategory": "Course",
+      "programTitle": "FIC Python & AI/ML Certification Course",
+      "role": "Python Developer",
+      "salary": "Career Support & Certificate",
+      "location": "Online",
+      "trainingPeriod": "3 Months",
+      "trainingSubtext": "3 Months Python, Data Science & ML Projects",
+      "stipend": "0",
+      "stipendSubtext": "Practical Training & Project Portfolio",
+      "trainingFee": "₹15,000 (One-time payment)",
+      "feeSubtext": "Course Fees (One-time payment)",
+      "bondPeriod": "No Bond",
+      "originalsRequired": "Not Required",
+      "description": "Comprehensive Python training covering programming fundamentals, Pandas, NumPy, Scikit-Learn, data visualization, and AI APIs.",
+      "responsibilities": [
+        "Core & Advanced Python: Data structures, OOP, file handling, and regex.",
+        "Data Analysis: NumPy, Pandas dataframes, Matplotlib and Seaborn visualization.",
+        "Machine Learning & AI: Scikit-Learn regression, classification, NLP, and OpenAI API.",
+        "End-to-end Capstone: Build and deploy machine learning models with Streamlit."
+      ],
+      "requirements": [
+        "Any Degree with analytical curiosity.",
+        "Basic mathematics and logic understanding.",
+        "Personal computer and dedication to completing weekly assignments."
+      ],
+      "order": 31,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_course_3",
+      "processName": "PROCESS 1",
+      "itCategory": "Course",
+      "programTitle": "FIC Java Enterprise & Microservices Course",
+      "role": "Java Developer",
+      "salary": "Career Support & Certificate",
+      "location": "Online",
+      "trainingPeriod": "3 Months",
+      "trainingSubtext": "3 Months Core Java, Spring Boot & Cloud",
+      "stipend": "0",
+      "stipendSubtext": "Practical Training & Project Portfolio",
+      "trainingFee": "₹15,000 (One-time payment)",
+      "feeSubtext": "Course Fees (One-time payment)",
+      "bondPeriod": "No Bond",
+      "originalsRequired": "Not Required",
+      "description": "Learn Core Java, OOP principles, Spring Boot framework, RESTful web services, Hibernate/JPA, and microservices architecture.",
+      "responsibilities": [
+        "Java Masterclass: OOP, Multithreading, Collections Framework, Streams API.",
+        "Enterprise Spring Boot: Dependency Injection, Spring Data JPA, Spring Security.",
+        "Microservices: Service discovery with Eureka, API Gateway, Kafka message queues.",
+        "Real-world banking and eCommerce enterprise project implementation."
+      ],
+      "requirements": [
+        "Any Degree with interest in robust backend engineering.",
+        "Willingness to learn object-oriented design and backend architecture.",
+        "Laptop/computer capable of running IntelliJ IDEA or Eclipse."
+      ],
+      "order": 32,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    },
+    {
+      "id": "it_proc_course_4",
+      "processName": "PROCESS 1",
+      "itCategory": "Course",
+      "programTitle": "FIC Software Engineering Foundation Course",
+      "role": "Software Engineer Trainee",
+      "salary": "Career Support & Certificate",
+      "location": "Online",
+      "trainingPeriod": "3 Months",
+      "trainingSubtext": "3 Months Data Structures, Algorithms & Web Systems",
+      "stipend": "0",
+      "stipendSubtext": "Practical Training & Project Portfolio",
+      "trainingFee": "₹15,000 (One-time payment)",
+      "feeSubtext": "Course Fees (One-time payment)",
+      "bondPeriod": "No Bond",
+      "originalsRequired": "Not Required",
+      "description": "Enroll in our comprehensive IT training courses designed for beginners to advanced professionals. Build real-world projects and accelerate your career.",
+      "responsibilities": [
+        "Fundamentals: Data Structures, Algorithms, Problem Solving, and Clean Code.",
+        "System Architecture: Client-server models, RESTful APIs, relational databases.",
+        "Developer Tools: Git, GitHub, Linux commands, Postman, debugging techniques.",
+        "Mock technical interviews and resume portfolio building."
+      ],
+      "requirements": [
+        "Any Degree (B.E, B.Tech, B.Sc, BCA, MCA, M.Tech) or beginners looking to start IT.",
+        "Basic logical thinking, computer fundamentals, and readiness to learn."
+      ],
+      "order": 33,
+      "status": "Active",
+      "createdAt": "2026-10-06T07:16:40.207Z"
+    }
+  ]
+}

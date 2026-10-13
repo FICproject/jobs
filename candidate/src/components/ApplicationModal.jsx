@@ -31,29 +31,89 @@ export default function ApplicationModal({ job, candidate, isOpen, onClose, onSu
 
   useEffect(() => {
     if (isOpen) {
-      setName(candidate?.name || '');
-      setEmail(candidate?.email || '');
-      setMobile(candidate?.mobile || '');
-      setLocation(candidate?.location || '');
-      setQualification(candidate?.qualification || '');
-      setExperience(candidate?.experience || '');
-      setResumeUrl(candidate?.resumeUrl || '');
+      setName('');
+      setEmail('');
+      setMobile('');
+      setLocation('');
+      setQualification('');
+      setExperience('');
+      setResumeUrl('');
       setCoverNotes('');
       setError('');
       setSuccessApp(null);
       setShowPayment(false);
     }
-  }, [isOpen, candidate]);
+  }, [isOpen]);
 
   if (!isOpen || !job) return null;
 
   const today = new Date();
   const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate()).toISOString().split('T')[0];
 
-  const handleSubmit = (e) => {
+  const [pendingAppId, setPendingAppId] = useState(null);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!showPayment) {
-      setShowPayment(true);
+      if (!name.trim()) {
+        setError('Please enter your full name.');
+        return;
+      }
+      if (!mobile.trim() || mobile.length < 10) {
+        setError('Please enter a valid 10-digit mobile number.');
+        return;
+      }
+      if (!email.trim() || !email.includes('@')) {
+        setError('Please enter a valid email address.');
+        return;
+      }
+
+      setSubmitting(true);
+      setError('');
+      try {
+        const payload = {
+          candidateId: candidate ? candidate.candidateId || candidate.id : null,
+          jobId: job.id,
+          resumeUrl,
+          coverNotes,
+          status: 'Payment Pending',
+          paymentAmount: feeAmount,
+          paymentId: null,
+          candidateName: name.trim(),
+          candidateEmail: email.trim(),
+          candidateMobile: mobile.trim(),
+          candidateLocation: location.trim(),
+          candidateQualification: qualification.trim(),
+          candidateExperience: experience.trim(),
+          candidateDetails: {
+            userId: candidate ? candidate.id : null,
+            name: name.trim(),
+            email: email.trim(),
+            mobile: mobile.trim(),
+            location: location.trim(),
+            city: location.trim(),
+            qualification: qualification.trim(),
+            experience: experience.trim()
+          },
+          referredBy: localStorage.getItem('hr_referral') || null
+        };
+
+        const res = await fetch(`${API_URL}/api/applications`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (res.ok && data) {
+          setPendingAppId(data.id || data._id);
+        }
+        setShowPayment(true);
+      } catch (err) {
+        console.warn('Error saving Payment Pending application:', err);
+        setShowPayment(true);
+      } finally {
+        setSubmitting(false);
+      }
       return;
     }
   };
@@ -115,22 +175,50 @@ export default function ApplicationModal({ job, candidate, isOpen, onClose, onSu
   };
 
   const submitApplicationToDb = async (paymentId) => {
-
+    setSubmitting(true);
     try {
+      const finalPaymentId = paymentId || 'MANUAL_PAYMENT_' + Date.now();
+
+      if (pendingAppId) {
+        const updateRes = await fetch(`${API_URL}/api/applications/${pendingAppId}/status`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            status: 'Applied',
+            paymentId: finalPaymentId,
+            paymentAmount: feeAmount
+          })
+        });
+        const updateData = await updateRes.json();
+        if (updateRes.ok) {
+          setSuccessApp(updateData);
+          if (onSubmitSuccess) onSubmitSuccess(updateData);
+          return;
+        }
+      }
+
       const payload = {
         candidateId: candidate ? candidate.candidateId || candidate.id : null,
         jobId: job.id,
         resumeUrl,
         coverNotes,
-        paymentId: paymentId || 'FREE_TEST_' + Date.now(),
+        status: 'Applied',
+        paymentId: finalPaymentId,
+        paymentAmount: feeAmount,
+        candidateName: name.trim(),
+        candidateEmail: email.trim(),
+        candidateMobile: mobile.trim(),
+        candidateLocation: location.trim(),
+        candidateQualification: qualification.trim(),
+        candidateExperience: experience.trim(),
         candidateDetails: {
           userId: candidate ? candidate.id : null,
-          name,
-          email,
-          mobile,
-          location,
-          qualification,
-          experience
+          name: name.trim(),
+          email: email.trim(),
+          mobile: mobile.trim(),
+          location: location.trim(),
+          qualification: qualification.trim(),
+          experience: experience.trim()
         },
         referredBy: localStorage.getItem('hr_referral') || null
       };

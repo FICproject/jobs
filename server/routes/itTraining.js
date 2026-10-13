@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { ItTrainingProcessModel } = require('../db');
+const { ItTrainingProcessModel, readDBAsync } = require('../db');
 
 // GET /api/it-training-processes
 router.get('/', async (req, res) => {
   try {
-    const processes = await ItTrainingProcessModel.find({ status: 'Active' }).sort({ order: 1, createdAt: 1 }).lean();
-    res.json(processes || []);
+    const db = await readDBAsync();
+    const processes = (db.itTrainingProcesses || []).filter(p => (p.status || 'Active') === 'Active');
+    res.json(processes);
   } catch (err) {
+    console.error('IT processes fetch error:', err);
     res.status(500).json({ error: 'Failed to fetch IT training processes.' });
   }
 });
@@ -15,8 +17,8 @@ router.get('/', async (req, res) => {
 // GET /api/it-training-processes/all (for admin)
 router.get('/all', async (req, res) => {
   try {
-    const processes = await ItTrainingProcessModel.find({}).sort({ order: 1, createdAt: 1 }).lean();
-    res.json(processes || []);
+    const db = await readDBAsync();
+    res.json(db.itTrainingProcesses || []);
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch IT training processes.' });
   }

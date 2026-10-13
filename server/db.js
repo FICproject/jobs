@@ -1,3 +1,10 @@
+const dns = require('dns');
+try {
+  dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
+} catch (e) {
+  console.warn('Could not set custom DNS servers:', e.message);
+}
+
 const mongoose = require('mongoose');
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://JobPortal:vmjpDTY7R3TPSmPA@cluster0.wkptyao.mongodb.net/recruitment_db?retryWrites=true&w=majority&appName=Cluster0';
@@ -18,9 +25,13 @@ const userSchema = new mongoose.Schema({
   skills: [String],
   resumeUrl: String,
   referralCode: { type: String, unique: true, sparse: true },
+  webReferralUrl: String,
+  mobileReferralUrl: String,
+  hrId: String,
+  parentHrId: String,
   linkClicks: { type: Number, default: 0 },
   createdAt: { type: String, default: () => new Date().toISOString() }
-});
+}, { strict: false });
 
 const categorySchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
@@ -103,8 +114,9 @@ const candidateSchema = new mongoose.Schema({
   experience: String,
   skills: [String],
   resumeUrl: String,
+  dob: String,
   createdAt: { type: String, default: () => new Date().toISOString() }
-});
+}, { strict: false });
 
 const applicationSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
@@ -114,14 +126,24 @@ const applicationSchema = new mongoose.Schema({
   companyId: String,
   categoryId: String,
   candidateDetails: mongoose.Schema.Types.Mixed,
+  candidateName: String,
+  candidateEmail: String,
+  candidateMobile: String,
+  candidateLocation: String,
+  candidateQualification: String,
+  candidateExperience: String,
+  candidateDob: String,
+  dob: String,
   resumeUrl: String,
   coverNotes: String,
   status: String,
   referredBy: String,
+  paymentId: String,
+  paymentAmount: Number,
   appliedAt: { type: String, default: () => new Date().toISOString() },
   adminNotes: String,
   updatedAt: String
-});
+}, { strict: false });
 
 const interviewSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
@@ -184,6 +206,13 @@ const ApplicationModel = mongoose.model('Application', applicationSchema);
 const InterviewModel = mongoose.model('Interview', interviewSchema);
 const ItTrainingProcessModel = mongoose.model('ItTrainingProcess', itTrainingProcessSchema);
 
+const referralClickSchema = new mongoose.Schema({
+  referralCode: { type: String, required: true },
+  ip: { type: String, required: true },
+  userAgent: String,
+  createdAt: { type: Date, default: Date.now, expires: 172800 }
+});
+const ReferralClickModel = mongoose.models.ReferralClick || mongoose.model('ReferralClick', referralClickSchema);
 
 const initialData = {
   users: [
@@ -698,11 +727,809 @@ const initialData = {
         { stepNumber: 4, title: 'Batch Onboarding & Launch', description: 'Final onboarding and batch induction' }
       ],
       order: 14,
+      itCategory: 'Placement',
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    // ==========================================
+    // 1. FIC FREE IT INTERNSHIP PROGRAMS
+    // ==========================================
+    {
+      id: 'it_proc_intern_1',
+      processName: 'PROCESS 1',
+      itCategory: 'Internship',
+      programTitle: 'FIC Free Full Stack Internship Program',
+      role: 'Full Stack Developer',
+      salary: 'Stipend: ₹0',
+      location: 'PAN INDIA / Online',
+      trainingPeriod: '3 Months',
+      trainingSubtext: '3 Months Live Enterprise Projects & Code Reviews',
+      stipend: '0',
+      stipendSubtext: '100% Free Internship - Zero Cost',
+      trainingFee: '100% FREE',
+      feeSubtext: 'Zero Cost • Real Experience',
+      bondPeriod: 'No Bond',
+      originalsRequired: 'Not Required',
+      description: 'Work on live production web apps using React, Node.js, and databases alongside experienced software leads. Build real portfolio projects without paying any fees.',
+      responsibilities: [
+        'Build features for real-world full stack applications with React and Node.js.',
+        'Collaborate with senior developers on GitHub workflows, pull requests, and code reviews.',
+        'Implement responsive user interfaces and backend REST API integrations.',
+        'Receive certificate of internship completion and performance recommendations.'
+      ],
+      requirements: [
+        'Any Degree (B.E, B.Tech, B.Sc, BCA, MCA, M.Tech) or currently studying.',
+        'Basic familiarity with web technologies (HTML, CSS, JavaScript).',
+        'Passion for software development and willingness to commit to project deadlines.'
+      ],
+      order: 20,
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'it_proc_intern_2',
+      processName: 'PROCESS 1',
+      itCategory: 'Internship',
+      programTitle: 'FIC Free Python & AI Engineering Internship',
+      role: 'Python Developer',
+      salary: 'Stipend: ₹0',
+      location: 'PAN INDIA / Online',
+      trainingPeriod: '3 Months',
+      trainingSubtext: '3 Months Hands-on Data & Web Pipeline Development',
+      stipend: '0',
+      stipendSubtext: '100% Free Internship - Zero Cost',
+      trainingFee: '100% FREE',
+      feeSubtext: 'Zero Cost • Real Experience',
+      bondPeriod: 'No Bond',
+      originalsRequired: 'Not Required',
+      description: 'Hands-on live project internship in Python, Django/FastAPI, API integrations, and machine learning pipelines under industry mentorship.',
+      responsibilities: [
+        'Develop Python backend endpoints and data manipulation scripts.',
+        'Integrate third-party REST APIs and work with relational/NoSQL databases.',
+        'Participate in machine learning dataset preparation and API deployment pipelines.',
+        'Earn industry experience letter and technical mentor recommendation.'
+      ],
+      requirements: [
+        'Any Degree (B.E, B.Tech, B.Sc, BCA, MCA, M.Tech) or final year student.',
+        'Foundational knowledge of Python syntax, logic, and data handling.',
+        'Curiosity about data pipelines, artificial intelligence, and cloud APIs.'
+      ],
+      order: 21,
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'it_proc_intern_3',
+      processName: 'PROCESS 1',
+      itCategory: 'Internship',
+      programTitle: 'FIC Free Java Enterprise Development Internship',
+      role: 'Java Developer',
+      salary: 'Stipend: ₹0',
+      location: 'PAN INDIA / Online',
+      trainingPeriod: '3 Months',
+      trainingSubtext: '3 Months Real Industry Backend Services Project',
+      stipend: '0',
+      stipendSubtext: '100% Free Internship - Zero Cost',
+      trainingFee: '100% FREE',
+      feeSubtext: 'Zero Cost • Real Experience',
+      bondPeriod: 'No Bond',
+      originalsRequired: 'Not Required',
+      description: 'Real industry experience building Java, Spring Boot microservices, REST APIs, and database transactions in commercial projects.',
+      responsibilities: [
+        'Implement enterprise Java services using Spring Boot and Hibernate.',
+        'Write clean unit tests, API documentations, and handle database migrations.',
+        'Troubleshoot bugs and optimize microservices performance under lead architect guidance.',
+        'Gain verified hands-on industry project experience.'
+      ],
+      requirements: [
+        'Any Graduate or student with computer science/IT interest.',
+        'Core Java fundamentals and OOP principles understanding.',
+        'Eagerness to learn Spring Boot and enterprise patterns.'
+      ],
+      order: 22,
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'it_proc_intern_4',
+      processName: 'PROCESS 1',
+      itCategory: 'Internship',
+      programTitle: 'FIC Free Software Engineer Internship',
+      role: 'Software Engineer Trainee',
+      salary: 'Stipend: ₹0',
+      location: 'PAN INDIA / Online',
+      trainingPeriod: '3 Months',
+      trainingSubtext: '3 Months Full Software Development Lifecycle',
+      stipend: '0',
+      stipendSubtext: '100% Free Internship - Zero Cost',
+      trainingFee: '100% FREE',
+      feeSubtext: 'Zero Cost • Real Experience',
+      bondPeriod: 'No Bond',
+      originalsRequired: 'Not Required',
+      description: 'Join our exclusive 100% Free Internship program. Work on live industry projects alongside experienced developers without paying any fees.',
+      responsibilities: [
+        'Collaborate on client software delivery and production release cycles.',
+        'Gain end-to-end exposure to agile development, Jira tickets, and GitHub.',
+        'Build features across front-end and back-end modules.',
+        'Receive industry verified internship credentials.'
+      ],
+      requirements: [
+        'Any Degree (B.E, B.Tech, B.Sc, BCA, MCA, M.Tech) with interest in IT careers.',
+        'Basic logical thinking, computer fundamentals, and readiness to learn.'
+      ],
+      order: 23,
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    // ==========================================
+    // 2. FIC IT TRAINING COURSES
+    // ==========================================
+    {
+      id: 'it_proc_course_1',
+      processName: 'PROCESS 1',
+      itCategory: 'Course',
+      programTitle: 'FIC Full Stack Web Development Master Course',
+      role: 'Full Stack Developer',
+      salary: 'Career Support & Certificate',
+      location: 'Online',
+      trainingPeriod: '3 Months',
+      trainingSubtext: '3 Months Modern MERN / Full Stack Curriculum',
+      stipend: '0',
+      stipendSubtext: 'Practical Training & Project Portfolio',
+      trainingFee: '₹15,000 (One-time payment)',
+      feeSubtext: 'Course Fees (One-time payment)',
+      bondPeriod: 'No Bond',
+      originalsRequired: 'Not Required',
+      description: 'Master HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, and Git. Build 5+ portfolio projects with code reviews and certificate.',
+      responsibilities: [
+        'Comprehensive curriculum: Modern HTML5, CSS3, ES6+ JavaScript, React.js & Redux.',
+        'Backend mastery: Node.js, Express REST APIs, MongoDB, Authentication & JWT.',
+        'Deployment & Cloud: Docker fundamentals, Vercel, AWS deployment and CI/CD pipelines.',
+        'Portfolio preparation: Build 5 production-grade applications for your resume.'
+      ],
+      requirements: [
+        'Any Degree (B.E, B.Tech, B.Sc, BCA, MCA, M.Tech) or working professionals.',
+        'No prior coding experience required; beginners welcome.',
+        'A laptop/PC with internet connection and commitment to practice.'
+      ],
+      order: 30,
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'it_proc_course_2',
+      processName: 'PROCESS 1',
+      itCategory: 'Course',
+      programTitle: 'FIC Python & AI/ML Certification Course',
+      role: 'Python Developer',
+      salary: 'Career Support & Certificate',
+      location: 'Online',
+      trainingPeriod: '3 Months',
+      trainingSubtext: '3 Months Python, Data Science & ML Projects',
+      stipend: '0',
+      stipendSubtext: 'Practical Training & Project Portfolio',
+      trainingFee: '₹15,000 (One-time payment)',
+      feeSubtext: 'Course Fees (One-time payment)',
+      bondPeriod: 'No Bond',
+      originalsRequired: 'Not Required',
+      description: 'Comprehensive Python training covering programming fundamentals, Pandas, NumPy, Scikit-Learn, data visualization, and AI APIs.',
+      responsibilities: [
+        'Core & Advanced Python: Data structures, OOP, file handling, and regex.',
+        'Data Analysis: NumPy, Pandas dataframes, Matplotlib and Seaborn visualization.',
+        'Machine Learning & AI: Scikit-Learn regression, classification, NLP, and OpenAI API.',
+        'End-to-end Capstone: Build and deploy machine learning models with Streamlit.'
+      ],
+      requirements: [
+        'Any Degree with analytical curiosity.',
+        'Basic mathematics and logic understanding.',
+        'Personal computer and dedication to completing weekly assignments.'
+      ],
+      order: 31,
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'it_proc_course_3',
+      processName: 'PROCESS 1',
+      itCategory: 'Course',
+      programTitle: 'FIC Java Enterprise & Microservices Course',
+      role: 'Java Developer',
+      salary: 'Career Support & Certificate',
+      location: 'Online',
+      trainingPeriod: '3 Months',
+      trainingSubtext: '3 Months Core Java, Spring Boot & Cloud',
+      stipend: '0',
+      stipendSubtext: 'Practical Training & Project Portfolio',
+      trainingFee: '₹15,000 (One-time payment)',
+      feeSubtext: 'Course Fees (One-time payment)',
+      bondPeriod: 'No Bond',
+      originalsRequired: 'Not Required',
+      description: 'Learn Core Java, OOP principles, Spring Boot framework, RESTful web services, Hibernate/JPA, and microservices architecture.',
+      responsibilities: [
+        'Java Masterclass: OOP, Multithreading, Collections Framework, Streams API.',
+        'Enterprise Spring Boot: Dependency Injection, Spring Data JPA, Spring Security.',
+        'Microservices: Service discovery with Eureka, API Gateway, Kafka message queues.',
+        'Real-world banking and eCommerce enterprise project implementation.'
+      ],
+      requirements: [
+        'Any Degree with interest in robust backend engineering.',
+        'Willingness to learn object-oriented design and backend architecture.',
+        'Laptop/computer capable of running IntelliJ IDEA or Eclipse.'
+      ],
+      order: 32,
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'it_proc_course_4',
+      processName: 'PROCESS 1',
+      itCategory: 'Course',
+      programTitle: 'FIC Software Engineering Foundation Course',
+      role: 'Software Engineer Trainee',
+      salary: 'Career Support & Certificate',
+      location: 'Online',
+      trainingPeriod: '3 Months',
+      trainingSubtext: '3 Months Data Structures, Algorithms & Web Systems',
+      stipend: '0',
+      stipendSubtext: 'Practical Training & Project Portfolio',
+      trainingFee: '₹15,000 (One-time payment)',
+      feeSubtext: 'Course Fees (One-time payment)',
+      bondPeriod: 'No Bond',
+      originalsRequired: 'Not Required',
+      description: 'Enroll in our comprehensive IT training courses designed for beginners to advanced professionals. Build real-world projects and accelerate your career.',
+      responsibilities: [
+        'Fundamentals: Data Structures, Algorithms, Problem Solving, and Clean Code.',
+        'System Architecture: Client-server models, RESTful APIs, relational databases.',
+        'Developer Tools: Git, GitHub, Linux commands, Postman, debugging techniques.',
+        'Mock technical interviews and resume portfolio building.'
+      ],
+      requirements: [
+        'Any Degree (B.E, B.Tech, B.Sc, BCA, MCA, M.Tech) or beginners looking to start IT.',
+        'Basic logical thinking, computer fundamentals, and readiness to learn.'
+      ],
+      order: 33,
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    }
+  ],
+  jobs: [
+    {
+      id: 'job_axis_am',
+      companyId: 'comp_axis',
+      categoryId: 'cat_banking',
+      title: 'Assistance Manager',
+      jobType: 'Full Time',
+      location: 'Chennai / Coimbatore / Madurai',
+      experience: '0 - 2 Years',
+      qualification: 'Any Graduate / Postgraduate',
+      salary: '₹3.5 LPA - ₹5.0 LPA',
+      trainingPeriod: 'Phase 1: 15 Days (Classroom Training) / Phase 2: 15 Days (On Job Training - OJT)',
+      trainingTitle: '30 Days Structured Training',
+      trainingSubtext: '15 Days Classroom Training | 15 Days On Job Training (OJT)',
+      stipendTitle: 'STIPEND ₹12,000',
+      stipendSubtext: '₹12,000 per month during training period',
+      salarySubtext: 'Fixed CTC + Performance Incentives',
+      locationSubtext: 'Branch Posting Based on Aadhar Address / Nearby Branch',
+      trainingFee: '1.6 LPA',
+      feeRefundType: '100% Placement Guarantee',
+      feeRefundDetails: '100% money back guarantee upon successful training completion',
+      openings: 5,
+      description: 'Responsible for driving retail banking operations, customer onboarding, and branch financial services.',
+      responsibilities: [
+        'Manage retail banking customers and handle everyday branch operational duties.',
+        'Provide advice on banking products including savings, term deposits, and credit services.',
+        'Ensure seamless KYC compliance and customer onboarding workflows.'
+      ],
+      requirements: [
+        'Bachelor’s degree in any discipline (Commerce/Arts/Science/Engineering).',
+        'Strong interpersonal communication and client management skills.',
+        'Willingness to learn banking regulations and financial products.'
+      ],
+      skills: ['Retail Banking', 'Customer Relationship', 'Branch Operations', 'KYC Compliance'],
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'job_axis_cso',
+      companyId: 'comp_axis',
+      categoryId: 'cat_banking',
+      title: 'Customer Service Officer',
+      jobType: 'Full Time',
+      location: 'Trichy / Salem / Vellore',
+      experience: '0 - 1 Years',
+      qualification: 'Any Degree',
+      salary: '₹3.0 LPA - ₹4.2 LPA',
+      trainingPeriod: 'Phase 1: 10 Days Classroom | Phase 2: 10 Days Field Training',
+      trainingTitle: '20 Days Training',
+      trainingSubtext: '10 Days Classroom | 10 Days Field Training',
+      stipendTitle: 'STIPEND ₹10,000',
+      stipendSubtext: '₹10,000 per month during induction',
+      salarySubtext: '₹3.0 - 4.2 LPA + Quarterly Bonus',
+      locationSubtext: 'Branch Location Near Candidate Residence',
+      trainingFee: '1.4 LPA',
+      feeRefundType: '100% Placement Guarantee',
+      feeRefundDetails: '100% placement assurance with structured refund policy',
+      openings: 3,
+      description: 'Assist branch walk-in clients, process documentation, and facilitate digital banking adoption.',
+      responsibilities: [
+        'Greet and guide branch visitors for digital banking kiosks and teller services.',
+        'Resolve client queries related to accounts, transfers, and debit/credit cards.'
+      ],
+      requirements: [
+        'Graduate in any discipline.',
+        'Good spoken English and regional language proficiency.'
+      ],
+      skills: ['Client Support', 'Banking Services', 'Digital Banking', 'Documentation'],
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'job_idfc_adm',
+      companyId: 'comp_idfc',
+      categoryId: 'cat_banking',
+      title: 'Associate Debt Manager',
+      jobType: 'Full Time',
+      location: 'Trichy / Madurai / Salem',
+      experience: '0 - 2 Years',
+      qualification: 'Any Graduate',
+      salary: '₹3.5 LPA - ₹5.0 LPA',
+      trainingPeriod: 'Phase 1: 15 Days Induction / Phase 2: 15 Days Field Immersion',
+      trainingTitle: '30 Days Program',
+      trainingSubtext: '15 Days Classroom Training | 15 Days Practical Field Work',
+      stipendTitle: 'STIPEND ₹12,000',
+      stipendSubtext: '₹12,000 monthly allowance during training',
+      salarySubtext: 'Annual CTC ₹3.5 - 5.0 LPA + Incentives',
+      locationSubtext: 'Home District Allotment',
+      trainingFee: '1.6 LPA',
+      feeRefundType: '100% Placement Guarantee',
+      feeRefundDetails: '100% fee refund upon non-selection guarantee',
+      openings: 4,
+      description: 'Manage portfolio recoveries, customer relationship management, and retail loan collection compliance.',
+      responsibilities: [
+        'Engage with retail and MSME loan clients for portfolio management and timely repayment.',
+        'Maintain high standards of ethical banking conduct and RBI compliance.'
+      ],
+      requirements: [
+        'Any Graduate with good communication and negotiation skills.',
+        'Valid two-wheeler and driving license preferred for field visits.'
+      ],
+      skills: ['Loan Portfolio', 'Client Relationship', 'Financial Management', 'Credit Evaluation'],
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'job_idfc_rm',
+      companyId: 'comp_idfc',
+      categoryId: 'cat_banking',
+      title: 'Relationship Manager - Retail Banking',
+      jobType: 'Full Time',
+      location: 'Chennai / Coimbatore / Bangalore',
+      experience: '0 - 3 Years',
+      qualification: 'Any Graduate / MBA',
+      salary: '₹4.0 LPA - ₹6.0 LPA',
+      trainingPeriod: 'Phase 1: 15 Days Classroom / Phase 2: 15 Days Branch Immersion',
+      trainingTitle: '30 Days Training',
+      trainingSubtext: '15 Days Classroom | 15 Days Branch Immersion',
+      stipendTitle: 'STIPEND ₹14,000',
+      stipendSubtext: '₹14,000 monthly stipend during training',
+      salarySubtext: '₹4.0 - 6.0 LPA + High Commission Structure',
+      locationSubtext: 'Branch Placement based on preference',
+      trainingFee: '1.8 LPA',
+      feeRefundType: '100% Placement Guarantee',
+      feeRefundDetails: '100% Placement Guarantee or Full Refund',
+      openings: 3,
+      description: 'Acquire and nurture high-net-worth individual (HNI) accounts, wealth products, and fixed deposits.',
+      responsibilities: [
+        'Drive client acquisition for premium savings accounts, NRI accounts, and wealth advisory.',
+        'Deliver exceptional relationship management and financial advisory support.'
+      ],
+      requirements: [
+        'Graduate or Post Graduate in Finance, Commerce, or Management.',
+        'Excellent verbal communication and relationship building capability.'
+      ],
+      skills: ['Wealth Management', 'HNI Acquisition', 'CASA Banking', 'Portfolio Advisory'],
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'job_kotak_bro',
+      companyId: 'comp_kotak',
+      categoryId: 'cat_banking',
+      title: 'Branch Relationship Officer',
+      jobType: 'Full Time',
+      location: 'Chennai / Bangalore / Hyderabad',
+      experience: '0 - 2 Years',
+      qualification: 'Any Graduate / Post Graduate',
+      salary: '₹3.5 LPA - ₹5.5 LPA',
+      trainingPeriod: 'Phase 1: 15 Days Classroom / Phase 2: 15 Days OJT',
+      trainingTitle: '30 Days Training Program',
+      trainingSubtext: '15 Days Classroom Training | 15 Days Branch OJT',
+      stipendTitle: 'STIPEND ₹12,500',
+      stipendSubtext: 'Monthly stipend during onboarding',
+      salarySubtext: '₹3.5 - 5.5 LPA with performance bonuses',
+      locationSubtext: 'Metropolitan and Tier-1 Branch Locations',
+      trainingFee: '1.6 LPA',
+      feeRefundType: '100% Placement Guarantee',
+      feeRefundDetails: 'Complete job guarantee upon successful training completion',
+      openings: 6,
+      description: 'Responsible for expanding CASA (Current Account & Savings Account) portfolio and cross-selling banking products.',
+      responsibilities: [
+        'Open new CASA accounts and onboard retail and institutional clients.',
+        'Cross-sell insurance, investment products, and commercial trade accounts.'
+      ],
+      requirements: [
+        'Any Degree holder with an appetite for client interaction and sales.',
+        'Strong drive, goal orientation, and banking ethics.'
+      ],
+      skills: ['CASA Acquisition', 'Branch Cross-selling', 'Customer Onboarding', 'Financial Services'],
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'job_kotak_am',
+      companyId: 'comp_kotak',
+      categoryId: 'cat_banking',
+      title: 'Acquisition Manager - CASA',
+      jobType: 'Full Time',
+      location: 'Coimbatore / Trichy / Madurai',
+      experience: '0 - 1 Years',
+      qualification: 'Any Degree',
+      salary: '₹3.2 LPA - ₹4.8 LPA',
+      trainingPeriod: 'Phase 1: 12 Days Classroom / Phase 2: 12 Days Field',
+      trainingTitle: '24 Days Induction',
+      trainingSubtext: '12 Days Classroom | 12 Days Field',
+      stipendTitle: 'STIPEND ₹11,000',
+      stipendSubtext: '₹11,000 monthly stipend',
+      salarySubtext: 'Base Salary + Uncapped Monthly Incentives',
+      locationSubtext: 'Local Region Branch',
+      trainingFee: '1.5 LPA',
+      feeRefundType: '100% Placement Guarantee',
+      feeRefundDetails: '100% refund guarantee',
+      openings: 4,
+      description: 'Direct client acquisition for commercial and individual banking accounts across assigned territory.',
+      responsibilities: [
+        'Meet business owners and individuals to showcase Kotak banking propositions.',
+        'Complete digital KYC paperwork and open savings and current accounts.'
+      ],
+      requirements: [
+        'Graduate in any discipline.',
+        'Enthusiastic attitude with good local geography knowledge.'
+      ],
+      skills: ['Account Acquisition', 'Territory Sales', 'Field Marketing'],
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'job_bandhan_be',
+      companyId: 'comp_bandhan',
+      categoryId: 'cat_banking',
+      title: 'Branch Banking Executive',
+      jobType: 'Full Time',
+      location: 'Chennai / Kolkata / Bangalore',
+      experience: '0 - 2 Years',
+      qualification: 'Graduate in any discipline',
+      salary: '₹3.0 LPA - ₹4.5 LPA',
+      trainingPeriod: 'Phase 1: 14 Days Training / Phase 2: 14 Days Practical Immersion',
+      trainingTitle: '28 Days Comprehensive Training',
+      trainingSubtext: '14 Days Classroom | 14 Days Practical Immersion',
+      stipendTitle: 'STIPEND ₹10,000',
+      stipendSubtext: '₹10,000 monthly allowance',
+      salarySubtext: '₹3.0 - 4.5 LPA Fixed + Annual Bonus',
+      locationSubtext: 'Selected based on candidate home district',
+      trainingFee: '1.5 LPA',
+      feeRefundType: '100% Placement Guarantee',
+      feeRefundDetails: '100% placement refund guarantee',
+      openings: 5,
+      description: 'Manage retail banking transactions, micro-credit accounts, and customer savings growth.',
+      responsibilities: [
+        'Assist branch operations including deposits, withdrawals, and account management.',
+        'Promote micro-banking, fixed deposits, and recurring deposit savings schemes.'
+      ],
+      requirements: [
+        'Any Degree with proficiency in basic computers and mathematics.',
+        'Friendly communication skills and client-first attitude.'
+      ],
+      skills: ['Branch Banking', 'Retail Operations', 'Cash Handling', 'Customer Service'],
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'job_aditya_dso',
+      companyId: 'comp_aditya',
+      categoryId: 'cat_banking',
+      title: 'Direct Sales Officer - Insurance & Wealth',
+      jobType: 'Full Time',
+      location: 'Chennai / Coimbatore',
+      experience: '0 - 2 Years',
+      qualification: 'Any Degree',
+      salary: '₹3.2 LPA - ₹4.8 LPA',
+      trainingPeriod: 'Phase 1: 10 Days Product Training / Phase 2: 10 Days OJT',
+      trainingTitle: '20 Days Intensive Training',
+      trainingSubtext: '10 Days Product Training | 10 Days Field OJT',
+      stipendTitle: 'STIPEND ₹11,000',
+      stipendSubtext: '₹11,000 stipend during training',
+      salarySubtext: '₹3.2 - 4.8 LPA + Incentive Structure',
+      locationSubtext: 'Branch and Direct Channel Location',
+      trainingFee: '1.5 LPA',
+      feeRefundType: '100% Placement Guarantee',
+      feeRefundDetails: '100% money back guarantee',
+      openings: 4,
+      description: 'Direct channel sales for Aditya Birla life insurance, investment, and health insurance plans.',
+      responsibilities: [
+        'Connect with pre-assigned leads to understand life protection and investment goals.',
+        'Recommend suitable term insurance and guaranteed savings policies.'
+      ],
+      requirements: [
+        'Graduate in any discipline.',
+        'Good negotiation, explanation, and presentation skills.'
+      ],
+      skills: ['Insurance Sales', 'Financial Planning', 'Direct Channel', 'Lead Conversion'],
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'job_aditya_ara',
+      companyId: 'comp_aditya',
+      categoryId: 'cat_banking',
+      title: 'Agency Relationship Associate',
+      jobType: 'Full Time',
+      location: 'Madurai / Trichy / Salem',
+      experience: '0 - 2 Years',
+      qualification: 'Any Graduate',
+      salary: '₹3.0 LPA - ₹4.5 LPA',
+      trainingPeriod: 'Phase 1: 15 Days Agency Training / Phase 2: 15 Days Field Deployment',
+      trainingTitle: '30 Days Training',
+      trainingSubtext: '15 Days Classroom | 15 Days Deployment',
+      stipendTitle: 'STIPEND ₹10,500',
+      stipendSubtext: 'Monthly allowance during training',
+      salarySubtext: 'Fixed CTC + Attractive Agency Multipliers',
+      locationSubtext: 'Local City Agency Office',
+      trainingFee: '1.4 LPA',
+      feeRefundType: '100% Placement Guarantee',
+      feeRefundDetails: '100% Placement Guarantee or Full Refund',
+      openings: 3,
+      description: 'Recruit and manage financial advisors, drive life insurance business and team targets.',
+      responsibilities: [
+        'Recruit, train, and mentor life insurance advisors and financial agents.',
+        'Drive monthly agency sales productivity and client satisfaction.'
+      ],
+      requirements: [
+        'Graduate in any field.',
+        'Leadership, team building, and motivational ability.'
+      ],
+      skills: ['Agency Management', 'Team Leadership', 'Sales Coaching', 'Recruitment'],
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'job_aditya_be',
+      companyId: 'comp_aditya',
+      categoryId: 'cat_banking',
+      title: 'Bancassurance Executive',
+      jobType: 'Full Time',
+      location: 'Bangalore / Chennai / Coimbatore',
+      experience: '0 - 3 Years',
+      qualification: 'Graduate / Post Graduate',
+      salary: '₹3.5 LPA - ₹5.2 LPA',
+      trainingPeriod: 'Phase 1: 14 Days Classroom / Phase 2: 14 Days Partner Branch OJT',
+      trainingTitle: '28 Days Structured Training',
+      trainingSubtext: '14 Days Classroom | 14 Days Partner Branch OJT',
+      stipendTitle: 'STIPEND ₹12,000',
+      stipendSubtext: '₹12,000 monthly allowance',
+      salarySubtext: '₹3.5 - 5.2 LPA + Partner Incentives',
+      locationSubtext: 'Partner Bank Branch Allotment',
+      trainingFee: '1.6 LPA',
+      feeRefundType: '100% Placement Guarantee',
+      feeRefundDetails: '100% money back guarantee on non-placement',
+      openings: 4,
+      description: 'Partner with affiliated bank branches to offer wealth and insurance products to bank customers.',
+      responsibilities: [
+        'Stationed at designated partner bank branches to assist walk-in customers.',
+        'Coordinate with branch managers to pitch insurance and investment solutions.'
+      ],
+      requirements: [
+        'Degree in Commerce, Management, or related field.',
+        'Polite customer interaction and banking acumen.'
+      ],
+      skills: ['Bancassurance', 'Partner Relations', 'Investment Advisory'],
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'job_mahindra_so',
+      companyId: 'comp_mahindra_fin',
+      categoryId: 'cat_banking',
+      title: 'Sales Officer - Rural Finance',
+      jobType: 'Full Time',
+      location: 'Trichy / Salem / Vellore',
+      experience: '0 - 3 Years',
+      qualification: 'Graduate in any discipline',
+      salary: '₹3.0 LPA - ₹4.5 LPA',
+      trainingPeriod: 'Phase 1: 10 Days Training / Phase 2: 10 Days Field Immersion',
+      trainingTitle: '20 Days Training',
+      trainingSubtext: '10 Days Training | 10 Days Field Immersion',
+      stipendTitle: 'STIPEND ₹10,000',
+      stipendSubtext: '₹10,000 during training phase',
+      salarySubtext: '₹3.0 - 4.5 LPA + Performance Incentives',
+      locationSubtext: 'Rural / Semi-urban Branch Office',
+      trainingFee: '1.4 LPA',
+      feeRefundType: '100% Placement Guarantee',
+      feeRefundDetails: '100% fee refund upon completion',
+      openings: 3,
+      description: 'Handle vehicle financing, tractor loans, and rural customer relationship management.',
+      responsibilities: [
+        'Source vehicle finance and tractor loan inquiries from dealerships and farmers.',
+        'Verify documentation and guide borrowers through the loan sanction process.'
+      ],
+      requirements: [
+        'Graduate in any stream.',
+        'Familiarity with rural dynamics, tractor/auto finance.'
+      ],
+      skills: ['Vehicle Finance', 'Rural Banking', 'Credit Appraisal', 'Field Sales'],
+      status: 'Active',
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: 'job_yes_bank',
+      companyId: 'comp_yes_bank',
+      categoryId: 'cat_banking',
+      title: 'Banking Operations Executive',
+      jobType: 'Full Time',
+      location: 'Chennai / Bangalore / Coimbatore',
+      experience: '0 - 2 Years',
+      qualification: 'Any Graduate / Post Graduate',
+      salary: '₹3.5 LPA - ₹5.0 LPA',
+      trainingPeriod: 'Phase 1: 15 Days Digital Banking / Phase 2: 15 Days Branch OJT',
+      trainingTitle: '30 Days Induction',
+      trainingSubtext: '15 Days Digital Banking | 15 Days Branch OJT',
+      stipendTitle: 'STIPEND ₹12,000',
+      stipendSubtext: '₹12,000 monthly stipend during training',
+      salarySubtext: '₹3.5 - 5.0 LPA CTC',
+      locationSubtext: 'YES Bank Branch near candidate residence',
+      trainingFee: '1.6 LPA',
+      feeRefundType: '100% Placement Guarantee',
+      feeRefundDetails: '100% Placement Guarantee or Full Refund',
+      openings: 2,
+      description: 'Manage retail banking operations, digital banking assistance, and customer transactions.',
+      responsibilities: [
+        'Execute daily branch operational tasks, account servicing, and digital kiosk assistance.',
+        'Explain fixed deposits, saving schemes, and mobile banking features to customers.'
+      ],
+      requirements: [
+        'Graduate in Commerce, Management, or Science.',
+        'High accuracy in operational paperwork and friendly client manners.'
+      ],
+      skills: ['Retail Operations', 'Digital Banking', 'Client Servicing', 'KYC Verification'],
       status: 'Active',
       createdAt: new Date().toISOString()
     }
   ]
 };
+
+// Local in-memory and disk persistence for offline/disconnected environment
+const fs = require('fs');
+const path = require('path');
+const dataDir = path.join(__dirname, 'data');
+const fallbackDbPath = path.join(dataDir, 'fallback_db.json');
+
+if (!fs.existsSync(dataDir)) {
+  try { fs.mkdirSync(dataDir, { recursive: true }); } catch (e) {}
+}
+
+const inMemoryStore = {
+  users: [...(initialData.users || [])],
+  categories: [...(initialData.categories || [])],
+  companies: [...(initialData.companies || [])],
+  jobs: [...(initialData.jobs || [])],
+  candidates: [],
+  applications: [],
+  interviews: [],
+  itTrainingProcesses: [...(initialData.itTrainingProcesses || [])]
+};
+
+// Try loading persisted jobs/companies from disk if available
+try {
+  if (fs.existsSync(fallbackDbPath)) {
+    const raw = fs.readFileSync(fallbackDbPath, 'utf8');
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === 'object') {
+      if (Array.isArray(parsed.jobs) && parsed.jobs.length > 0) {
+        // Merge disk jobs with initial jobs
+        const existingIds = new Set(parsed.jobs.map(j => j.id));
+        const mergedJobs = [...parsed.jobs];
+        for (const initJob of (initialData.jobs || [])) {
+          if (!existingIds.has(initJob.id)) {
+            mergedJobs.push(initJob);
+          }
+        }
+        inMemoryStore.jobs = mergedJobs;
+      }
+      if (Array.isArray(parsed.companies) && parsed.companies.length > 0) inMemoryStore.companies = parsed.companies;
+      if (Array.isArray(parsed.categories) && parsed.categories.length > 0) inMemoryStore.categories = parsed.categories;
+      if (Array.isArray(parsed.candidates) && parsed.candidates.length > 0) inMemoryStore.candidates = parsed.candidates;
+      if (Array.isArray(parsed.users) && parsed.users.length > 0) inMemoryStore.users = parsed.users;
+      if (Array.isArray(parsed.applications) && parsed.applications.length > 0) inMemoryStore.applications = parsed.applications;
+      if (Array.isArray(parsed.interviews) && parsed.interviews.length > 0) inMemoryStore.interviews = parsed.interviews;
+      if (Array.isArray(parsed.itTrainingProcesses) && parsed.itTrainingProcesses.length > 0) inMemoryStore.itTrainingProcesses = parsed.itTrainingProcesses;
+    }
+  }
+} catch (e) {
+  console.warn('Could not load fallback_db.json:', e.message);
+}
+
+function saveStoreToDisk() {
+  try {
+    fs.writeFileSync(fallbackDbPath, JSON.stringify(inMemoryStore, null, 2), 'utf8');
+  } catch (e) {
+    console.error('Failed to save fallback_db.json:', e.message);
+  }
+}
+
+function saveCandidateInMemory(candidate) {
+  if (!inMemoryStore.candidates) inMemoryStore.candidates = [];
+  const idx = inMemoryStore.candidates.findIndex(c => c.id === candidate.id || (candidate.email && c.email === candidate.email));
+  if (idx >= 0) {
+    inMemoryStore.candidates[idx] = { ...inMemoryStore.candidates[idx], ...candidate };
+  } else {
+    inMemoryStore.candidates.unshift(candidate);
+  }
+  saveStoreToDisk();
+  return candidate;
+}
+
+function saveApplicationInMemory(application) {
+  if (!inMemoryStore.applications) inMemoryStore.applications = [];
+  const idx = inMemoryStore.applications.findIndex(a => a.id === application.id);
+  if (idx >= 0) {
+    inMemoryStore.applications[idx] = { ...inMemoryStore.applications[idx], ...application };
+  } else {
+    inMemoryStore.applications.unshift(application);
+  }
+  saveStoreToDisk();
+  return application;
+}
+
+function updateApplicationInMemory(id, updateObj) {
+  if (!inMemoryStore.applications) inMemoryStore.applications = [];
+  const idx = inMemoryStore.applications.findIndex(a => a.id === id);
+  if (idx >= 0) {
+    inMemoryStore.applications[idx] = { ...inMemoryStore.applications[idx], ...updateObj };
+    saveStoreToDisk();
+    return inMemoryStore.applications[idx];
+  }
+  return null;
+}
+
+function saveJobInMemory(newJob) {
+  const existingIdx = inMemoryStore.jobs.findIndex(j => j.id === newJob.id);
+  if (existingIdx >= 0) {
+    inMemoryStore.jobs[existingIdx] = { ...inMemoryStore.jobs[existingIdx], ...newJob };
+  } else {
+    inMemoryStore.jobs.unshift(newJob);
+  }
+  saveStoreToDisk();
+  return newJob;
+}
+
+function updateJobInMemory(id, updateObj) {
+  const idx = inMemoryStore.jobs.findIndex(j => j.id === id);
+  if (idx >= 0) {
+    inMemoryStore.jobs[idx] = { ...inMemoryStore.jobs[idx], ...updateObj };
+    saveStoreToDisk();
+    return inMemoryStore.jobs[idx];
+  }
+  return null;
+}
+
+function deleteJobInMemory(id) {
+  const idx = inMemoryStore.jobs.findIndex(j => j.id === id);
+  if (idx >= 0) {
+    inMemoryStore.jobs.splice(idx, 1);
+    saveStoreToDisk();
+    return true;
+  }
+  return false;
+}
 
 // Seed MongoDB & Ensure Categories and Companies default exist in Atlas
 async function seedMongoIfEmpty() {
@@ -726,11 +1553,18 @@ async function seedMongoIfEmpty() {
     const companyCount = await CompanyModel.countDocuments();
     if (companyCount === 0) {
       await CompanyModel.insertMany(initialData.companies);
-      console.log('✅ Seeded default 6 hiring companies with official bank logos into MongoDB Atlas Cloud');
+      console.log('✅ Seeded default hiring companies with official bank logos into MongoDB Atlas Cloud');
     } else {
       for (const comp of initialData.companies) {
         await CompanyModel.updateOne({ id: comp.id }, { $set: { logo: comp.logo } });
       }
+    }
+
+    // Seed jobs if 0 exist
+    const jobCount = await JobModel.countDocuments();
+    if (jobCount === 0 && initialData.jobs && initialData.jobs.length > 0) {
+      await JobModel.insertMany(initialData.jobs);
+      console.log(`✅ Seeded ${initialData.jobs.length} banking jobs into MongoDB Atlas Cloud`);
     }
 
     // Seed or synchronize IT Training Processes
@@ -753,19 +1587,35 @@ async function connectMongoDB() {
   try {
     mongoose.set('strictQuery', false);
     await mongoose.connect(MONGODB_URI, {
-      serverSelectionTimeoutMS: 10000
+      serverSelectionTimeoutMS: 3000,
+      connectTimeoutMS: 3000,
     });
     isMongoConnected = true;
     console.log(`🍃 Connected to MongoDB Atlas Cloud Database successfully at ${MONGODB_URI}`);
     await seedMongoIfEmpty();
   } catch (err) {
     isMongoConnected = false;
-    console.error(`❌ MongoDB Atlas connection error (${err.message})`);
+    console.error(`❌ MongoDB Atlas connection error (${err.message}). Using local memory fallback.`);
   }
 }
 
-// Read database directly from MongoDB Atlas Cloud collections
+// Read database directly from MongoDB Atlas Cloud collections or local memory
 async function readDBAsync() {
+  if (!isMongoConnected) {
+    return {
+      users: inMemoryStore.users || [],
+      categories: inMemoryStore.categories || [],
+      companies: inMemoryStore.companies || [],
+      jobs: inMemoryStore.jobs || [],
+      candidates: inMemoryStore.candidates || [],
+      applications: inMemoryStore.applications || [],
+      interviews: inMemoryStore.interviews || [],
+      itTrainingProcesses: (inMemoryStore.itTrainingProcesses || []).map(p => ({
+        ...p,
+        itCategory: p.itCategory || 'Placement'
+      }))
+    };
+  }
   try {
     const [users, categories, companies, jobs, candidates, applications, interviews, itTrainingProcesses] = await Promise.all([
       UserModel.find({}).lean(),
@@ -777,27 +1627,35 @@ async function readDBAsync() {
       InterviewModel.find({}).lean(),
       ItTrainingProcessModel.find({}).lean()
     ]);
+    const rawProcesses = (itTrainingProcesses && itTrainingProcesses.length > 0) ? itTrainingProcesses : inMemoryStore.itTrainingProcesses;
+    const finalJobs = (jobs && jobs.length > 0) ? jobs : inMemoryStore.jobs;
     return {
-      users: users || [],
-      categories: categories || [],
-      companies: companies || [],
-      jobs: jobs || [],
-      candidates: candidates || [],
-      applications: applications || [],
-      interviews: interviews || [],
-      itTrainingProcesses: (itTrainingProcesses && itTrainingProcesses.length > 0) ? itTrainingProcesses : initialData.itTrainingProcesses
+      users: users || inMemoryStore.users,
+      categories: (categories && categories.length > 0) ? categories : inMemoryStore.categories,
+      companies: (companies && companies.length > 0) ? companies : inMemoryStore.companies,
+      jobs: finalJobs || [],
+      candidates: candidates || inMemoryStore.candidates,
+      applications: applications || inMemoryStore.applications,
+      interviews: interviews || inMemoryStore.interviews,
+      itTrainingProcesses: (rawProcesses || []).map(p => ({
+        ...p,
+        itCategory: p.itCategory || 'Placement'
+      }))
     };
   } catch (err) {
     console.error('Error reading from MongoDB Atlas Cloud:', err.message);
     return {
-      users: [],
-      categories: initialData.categories,
-      companies: initialData.companies,
-      jobs: [],
-      candidates: [],
-      applications: [],
-      interviews: [],
-      itTrainingProcesses: initialData.itTrainingProcesses
+      users: inMemoryStore.users || [],
+      categories: inMemoryStore.categories || [],
+      companies: inMemoryStore.companies || [],
+      jobs: inMemoryStore.jobs || [],
+      candidates: inMemoryStore.candidates || [],
+      applications: inMemoryStore.applications || [],
+      interviews: inMemoryStore.interviews || [],
+      itTrainingProcesses: (inMemoryStore.itTrainingProcesses || []).map(p => ({
+        ...p,
+        itCategory: p.itCategory || 'Placement'
+      }))
     };
   }
 }
@@ -822,6 +1680,17 @@ module.exports = {
   CandidateModel,
   ApplicationModel,
   InterviewModel,
-  ItTrainingProcessModel
+  ItTrainingProcessModel,
+  ReferralClickModel,
+  inMemoryStore,
+  saveJobInMemory,
+  updateJobInMemory,
+  deleteJobInMemory,
+  saveCandidateInMemory,
+  saveApplicationInMemory,
+  updateApplicationInMemory,
+  saveStoreToDisk,
+  getIsMongoConnected: () => isMongoConnected
 };
+
 

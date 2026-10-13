@@ -22,6 +22,9 @@ router.get('/', async (req, res) => {
       const job = db.jobs.find(j => j.id === int.jobId) || {};
       const company = db.companies.find(c => c.id === int.companyId || c.id === job.companyId) || {};
 
+      const app = (db.applications || []).find(a => a.id === int.applicationId || a.candidateId === int.candidateId) || {};
+      const hr = (db.users || []).find(u => u.referralCode === app.referredBy) || {};
+
       return {
         ...int,
         candidateName: candidate.name || 'Candidate',
@@ -29,7 +32,10 @@ router.get('/', async (req, res) => {
         candidateMobile: candidate.mobile || '',
         jobTitle: job.title || 'Job Role',
         companyName: company.name || 'Company',
-        companyLogo: company.logo || ''
+        companyLogo: company.logo || '',
+        referredBy: app.referredBy || null,
+        hrName: hr.name || (app.referredBy ? 'HR Partner' : 'Direct'),
+        hrReferralCode: app.referredBy || null,
       };
     });
 

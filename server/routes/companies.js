@@ -1,15 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const { CompanyModel } = require('../db');
+const { CompanyModel, readDBAsync } = require('../db');
 
 // GET /api/companies (optional query ?categoryId=xxx)
 router.get('/', async (req, res) => {
   try {
     const { categoryId } = req.query;
-    const filter = categoryId ? { categoryId } : {};
-    const companies = await CompanyModel.find(filter).lean();
+    const db = await readDBAsync();
+    let companies = db.companies || [];
+    if (categoryId) {
+      companies = companies.filter(c => c.categoryId === categoryId);
+    }
     const baseUrl = `${req.protocol}://${req.get('host')}`;
-    const formatted = (companies || []).map(c => {
+    const formatted = companies.map(c => {
       let logo = c.logo || '';
       if (logo.startsWith('http://localhost:5000')) {
         logo = logo.replace('http://localhost:5000', baseUrl);
@@ -20,7 +23,8 @@ router.get('/', async (req, res) => {
     });
     res.json(formatted);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch companies from MongoDB Atlas.' });
+    console.error('Companies fetch error:', err);
+    res.status(500).json({ error: 'Failed to fetch companies.' });
   }
 });
 
